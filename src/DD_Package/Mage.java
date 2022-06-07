@@ -8,14 +8,14 @@ public class Mage extends Player{
     private int ability_range;
 
     public Mage(int mana_pool, int mana_cost, int spell_power, int hits_count, int ability_range, String na, char ch, int a_p, int d_p, int h_p, int x, int y){
-        super.setExperience(0);
-        super.setPlayer_Level(1);
-        super.setAttack_points(a_p);
-        super.setDefense_points(d_p);
-        super.setHealth(new Health(h_p, h_p));
-        super.setName(na);
-        super.setCharacter(ch);
-        super.setCoordinate(new Coordinate(x, y));
+        this.setExperience(0);
+        this.setPlayer_Level(1);
+        this.setAttack_points(a_p);
+        this.setDefense_points(d_p);
+        this.setHealth(new Health(h_p, h_p));
+        this.setName(na);
+        this.setCharacter(ch);
+        this.setCoordinate(new Coordinate(x, y));
 
         this.mana = new Mana(mana_pool, mana_pool / 4);
         this.mana_cost = mana_cost;
@@ -26,13 +26,30 @@ public class Mage extends Player{
 
     public void Level_Up(){
         super.Level_Up();
-        //////////  now addons
+        ////////////////////////////  now addons  ////////////////////////////
+        this.mana.setMana_pool(this.mana.getMana_pool() + (25*this.getPlayer_Level()));
+        this.mana.setCurrent_mana(Math.min(this.mana.getCurrent_mana() + (this.mana.getMana_pool()/4), this.mana.getMana_pool()));
+        this.spell_power = this.spell_power + (10*this.getPlayer_Level());
     }
 
     @Override
     public void Ability_Cast() {
-
+        if(this.mana.getCurrent_mana() < this.mana_cost){
+            System.out.println("You don't have enough Mana in order to use your ability");
+        }else{
+            this.mana.setCurrent_mana(this.mana.getCurrent_mana() - this.mana_cost);
+            int hits = 0;
+            while(hits < this.hits_count && ){
+                //////////// continue casting the ability
+                hits += 1;
+            }
+        }
     }
 
+    public void On_Tick_Do() {
+        super.On_Tick_Do();
+        this.mana.setCurrent_mana(Math.min(this.mana.getMana_pool(), this.mana.getCurrent_mana() + this.getPlayer_Level()));
+        ///////////  continue
+    }
 
 }

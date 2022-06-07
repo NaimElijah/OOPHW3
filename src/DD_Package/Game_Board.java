@@ -6,8 +6,8 @@ public class Game_Board {
     private ArrayList<ArrayList<Tile>> Board;
     private InputReader reader;
 
-    public Game_Board(String file_path){
-        this.reader = new InputReader(file_path);
+    public Game_Board(String file_path, int player){
+        this.reader = new InputReader(file_path, player);
         this.Board = this.reader.Read();
     }
 

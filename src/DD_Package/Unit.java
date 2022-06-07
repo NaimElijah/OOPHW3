@@ -6,6 +6,12 @@ public abstract class Unit extends Tile {
     private int Attack_points;
     private int Defense_points;
 
+
+    public void On_Tick_Do() {   //// maybe the same trick with Level_Up, maybe put it in Unit and everyone will override
+        ///////////  continue
+    }
+
+
     public String getName() {
         return this.Name;
     }

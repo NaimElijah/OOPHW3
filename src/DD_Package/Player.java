@@ -27,7 +27,10 @@ public abstract class Player extends Unit{
         }
     }
 
-    public abstract void On_Tick_Do();  //// maybe the same trick with Level_Up, maybe put it in Unit and everyone will override
+    public void On_Tick_Do() {   //// maybe the same trick with Level_Up, maybe put it in Unit and everyone will override
+        super.On_Tick_Do();
+        ///////////  continue
+    }
 
 
 
