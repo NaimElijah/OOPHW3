@@ -1,6 +1,6 @@
 package DD_Package;
 
-public abstract class Unit extends tile{
+public abstract class Unit extends Tile {
     private String Name;
     private Health Health;
     private int Attack_points;

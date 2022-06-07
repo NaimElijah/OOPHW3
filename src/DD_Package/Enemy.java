@@ -2,5 +2,12 @@ package DD_Package;
 
 public abstract class Enemy extends Unit{
     private int Experience_value;
-    private int Test;
+
+    public int getExperience_value(){
+        return this.Experience_value;
+    }
+
+    public void setExperience_value(int experience_value) {
+        this.Experience_value = experience_value;
+    }
 }

@@ -1,5 +1,5 @@
 package DD_Package;
 
-public class Wall extends tile{
+public class Wall extends Tile {
 
 }

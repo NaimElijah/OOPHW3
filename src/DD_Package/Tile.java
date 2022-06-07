@@ -1,6 +1,6 @@
 package DD_Package;
 
-public abstract class tile {
+public abstract class Tile {
     private char character;
     private Coordinate coordinate;
 
@@ -20,7 +20,7 @@ public abstract class tile {
         return this.coordinate;
     }
 
-    public double getRange(tile other){
+    public double getRange(Tile other){
         return Math.sqrt(Math.pow(this.coordinate.getX_coor() - other.getCoordinate().getX_coor(), 2) + Math.pow(this.coordinate.getY_coor() - other.getCoordinate().getY_coor(), 2));
     }
 
