@@ -1,13 +1,13 @@
 package DD_Package;
 
 public class Mage extends Player{
-    private Mana mana;
-    private int mana_cost;
-    private int spell_power;
-    private int hits_count;
-    private int ability_range;
+    protected Mana mana;
+    protected int mana_cost;
+    protected int spell_power;
+    protected int hits_count;
+    protected int ability_range;
 
-    public Mage(int mana_pool, int mana_cost, int spell_power, int hits_count, int ability_range, String na, char ch, int a_p, int d_p, int h_p, int x, int y){
+    public Mage(int mana_pool, int mana_cost, int spell_power, int hits_count, int ability_range, String na, String ch, int a_p, int d_p, int h_p, int x, int y){
         this.setExperience(0);
         this.setPlayer_Level(1);
         this.setAttack_points(a_p);

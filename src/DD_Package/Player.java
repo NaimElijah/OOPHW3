@@ -1,8 +1,8 @@
 package DD_Package;
 
 public abstract class Player extends Unit{
-    private int Experience;
-    private int Player_Level;
+    protected int Experience;
+    protected int Player_Level;
 
 
 
@@ -20,10 +20,10 @@ public abstract class Player extends Unit{
 
     public abstract void Ability_Cast();
 
-    public void Experience_Addition(int Addition){   ////////  only needed in this class
+    public void Experience_Addition(int Addition){   ////////  only needed in this class, might need to be in every player class, think it's ok here
         this.Experience = this.Experience + Addition;
-        if(this.Experience >= 50*this.Player_Level){
-            this.Level_Up();
+        while(this.Experience >= 50*this.Player_Level){
+            this.Level_Up();  ////  I want this to activate the Level_Up() of Warrior, Mage or Rogue
         }
     }
 

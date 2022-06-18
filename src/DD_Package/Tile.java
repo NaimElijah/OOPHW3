@@ -1,14 +1,14 @@
 package DD_Package;
 
 public abstract class Tile {
-    private char character;
-    private Coordinate coordinate;
+    protected String character;
+    protected Coordinate coordinate;
 
-    public char getCharacter(){
+    public String getCharacter(){
         return this.character;
     }
 
-    public void setCharacter(char character) {
+    public void setCharacter(String character) {
         this.character = character;
     }
 

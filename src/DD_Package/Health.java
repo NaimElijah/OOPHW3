@@ -1,8 +1,8 @@
 package DD_Package;
 
 public class Health {
-    private int Health_pool;
-    private int Health_amount;
+    protected int Health_pool;
+    protected int Health_amount;
 
     public Health(int health_pool, int health_amount){
         this.Health_pool = health_pool;

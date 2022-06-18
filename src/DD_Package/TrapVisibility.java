@@ -1,10 +1,10 @@
 package DD_Package;
 
 public class TrapVisibility {
-    private int visibility_time;
-    private int invisibility_time;
-    private boolean visible;
-    private int ticks_count;
+    protected int visibility_time;
+    protected int invisibility_time;
+    protected boolean visible;
+    protected int ticks_count;
 
     public TrapVisibility(int visibility_time, int invisibility_time){
         this.visibility_time = visibility_time;

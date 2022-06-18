@@ -1,7 +1,7 @@
 package DD_Package;
 
-public abstract class Enemy extends Unit{
-    private int Experience_value;
+public abstract class Enemy extends Unit implements EnemyDeathCallback{
+    protected int Experience_value;
 
     public int getExperience_value(){
         return this.Experience_value;

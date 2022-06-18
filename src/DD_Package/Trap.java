@@ -1,9 +1,9 @@
 package DD_Package;
 
 public class Trap extends Enemy{
-    private TrapVisibility visibility;
+    protected TrapVisibility visibility;
 
-    public Trap(int vis_t, int invis_t, String na, char ch, int experience_value, int a_p, int d_p, int h_p, int x, int y){
+    public Trap(int vis_t, int invis_t, String na, String ch, int experience_value, int a_p, int d_p, int h_p, int x, int y){
         this.setAttack_points(a_p);
         this.setDefense_points(d_p);
         this.setHealth(new Health(h_p, h_p));
@@ -26,7 +26,7 @@ public class Trap extends Enemy{
     public void On_Tick_Do() {
         super.On_Tick_Do();
         this.visibility.setVisible(this.visibility.getTicks_count() < this.visibility.getVisibility_time());
-        if (this.visibility.getTicks_count() == this.visibility.getVisibility_time() + this.visibility.getInvisibility_time()){
+        if (this.visibility.getTicks_count() == this.visibility.getVisibility_time() + this.visibility.getInvisibility_time()){ // visibility mode changing
             this.visibility.setTicks_count(0);
         }else{
             this.visibility.setTicks_count(this.visibility.getTicks_count() + 1);

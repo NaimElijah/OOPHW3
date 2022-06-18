@@ -1,8 +1,8 @@
 package DD_Package;
 
 public class Mana {
-    private int mana_pool;
-    private int current_mana;
+    protected int mana_pool;
+    protected int current_mana;
 
     public Mana(int mana_pool, int current_mana){
         this.mana_pool = mana_pool;

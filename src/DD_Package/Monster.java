@@ -1,9 +1,9 @@
 package DD_Package;
 
 public class Monster extends Enemy{
-    private int vision_range;
+    protected int vision_range;
 
-    public Monster(String na, char ch, int vision_range, int experience_value, int a_p, int d_p, int h_p, int x, int y){
+    public Monster(String na, String ch, int vision_range, int experience_value, int a_p, int d_p, int h_p, int x, int y){
         this.setAttack_points(a_p);
         this.setDefense_points(d_p);
         this.setHealth(new Health(h_p, h_p));

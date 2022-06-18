@@ -1,14 +1,18 @@
 package DD_Package;
 
 public abstract class Unit extends Tile {
-    private String Name;
-    private Health Health;
-    private int Attack_points;
-    private int Defense_points;
+    protected String Name;
+    protected Health Health;
+    protected int Attack_points;
+    protected int Defense_points;
 
 
     public void On_Tick_Do() {   //// maybe the same trick with Level_Up, maybe put it in Unit and everyone will override
         ///////////  continue
+    }
+
+    public String describe() {
+        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack_points(), getDefense_points());
     }
 
 

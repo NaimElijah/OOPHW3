@@ -2,10 +2,10 @@ package DD_Package;
 
 public class Rogue extends Player{
 
-    private int cost;
-    private int current_energy;
+    protected int cost;
+    protected int current_energy;
 
-    public Rogue(int cost, String na, char ch, int a_p, int d_p, int h_p, int x, int y){
+    public Rogue(int cost, String na, String ch, int a_p, int d_p, int h_p, int x, int y){
         this.setExperience(0);
         this.setPlayer_Level(1);
         this.setAttack_points(a_p);

@@ -1,8 +1,8 @@
 package DD_Package;
 
 public class Coordinate {
-    private int x_coor;
-    private int y_coor;
+    protected int x_coor;
+    protected int y_coor;
 
     public Coordinate(int x, int y){
         this.x_coor = x;

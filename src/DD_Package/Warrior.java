@@ -2,10 +2,10 @@ package DD_Package;
 
 public class Warrior extends Player{
 
-    private int ability_cooldown;
-    private int remaining_cooldown;
+    protected int ability_cooldown;
+    protected int remaining_cooldown;
 
-    public Warrior(int ability_cooldown, String na, char ch, int a_p, int d_p, int h_p, int x, int y){
+    public Warrior(int ability_cooldown, String na, String ch, int a_p, int d_p, int h_p, int x, int y){
         this.setExperience(0);
         this.setPlayer_Level(1);
         this.setAttack_points(a_p);
