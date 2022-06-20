@@ -6,14 +6,24 @@ public abstract class Unit extends Tile {
     protected int Attack_points;
     protected int Defense_points;
 
+    protected MessageCallback messageCallback;   ////////  initialize later with a method  !!!!!
 
-    public void On_Tick_Do() {   //// maybe the same trick with Level_Up, maybe put it in Unit and everyone will override
-        ///////////  continue
+    protected Unit(String character, Coordinate coordinate, String name, Health health, int attack_points, int defense_points){
+        super(character, coordinate);
+        this.Name = name;
+        this.Health = health;
+        this.Attack_points = attack_points;
+        this.Defense_points = defense_points;
     }
+
+
+    ////////////////////   different on tick do()'s in the different units
 
     public String describe() {
         return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack_points(), getDefense_points());
     }
+
+
 
 
     public String getName() {
@@ -37,11 +47,14 @@ public abstract class Unit extends Tile {
         this.Attack_points = attack_points;
     }
 
-    public int getDefense_points() {
-        return this.Defense_points;
-    }
+    public int getDefense_points() { return this.Defense_points; }
     public void setDefense_points(int defense_points) {
         this.Defense_points = defense_points;
     }
+
+    public MessageCallback getMessageCallback() { return this.messageCallback; }
+
+    public abstract void attack(Unit unit);
+    public abstract void defense(Unit unit);
 
 }

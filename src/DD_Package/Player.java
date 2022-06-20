@@ -4,6 +4,11 @@ public abstract class Player extends Unit{
     protected int Experience;
     protected int Player_Level;
 
+    protected Player(Coordinate coordinate, String name, Health health, int attack_points, int defense_points) {
+        super("@", coordinate, name, health, attack_points, defense_points);
+        this.Experience = 0;
+        this.Player_Level = 1;
+    }
 
 
     public void Level_Up(){
@@ -27,9 +32,10 @@ public abstract class Player extends Unit{
         }
     }
 
-    public void On_Tick_Do() {   //// maybe the same trick with Level_Up, maybe put it in Unit and everyone will override
-        super.On_Tick_Do();
-        ///////////  continue
+
+    @Override
+    public void move(Tile tile){
+        tile.move(this);
     }
 
 
@@ -52,4 +58,6 @@ public abstract class Player extends Unit{
     public void setPlayer_Level(int player_Level) {
         this.Player_Level = player_Level;
     }
+
+
 }

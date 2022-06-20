@@ -7,16 +7,8 @@ public class Mage extends Player{
     protected int hits_count;
     protected int ability_range;
 
-    public Mage(int mana_pool, int mana_cost, int spell_power, int hits_count, int ability_range, String na, String ch, int a_p, int d_p, int h_p, int x, int y){
-        this.setExperience(0);
-        this.setPlayer_Level(1);
-        this.setAttack_points(a_p);
-        this.setDefense_points(d_p);
-        this.setHealth(new Health(h_p, h_p));
-        this.setName(na);
-        this.setCharacter(ch);
-        this.setCoordinate(new Coordinate(x, y));
-
+    public Mage(int x, int y, String name, int h_p, int attack_points, int defense_points, int mana_pool, int mana_cost, int spell_power, int hits_count, int ability_range) {
+        super(new Coordinate(x, y), name, new Health(h_p, h_p), attack_points, defense_points);
         this.mana = new Mana(mana_pool, mana_pool / 4);
         this.mana_cost = mana_cost;
         this.spell_power = spell_power;
@@ -26,7 +18,7 @@ public class Mage extends Player{
 
     public void Level_Up(){
         super.Level_Up();
-        ////////////////////////////  now addons  ////////////////////////////
+        ////////////////////////////  now addons  ////////////////////////////  /////  add print here or somewhere else
         this.mana.setMana_pool(this.mana.getMana_pool() + (25*this.getPlayer_Level()));
         this.mana.setCurrent_mana(Math.min(this.mana.getCurrent_mana() + (this.mana.getMana_pool()/4), this.mana.getMana_pool()));
         this.spell_power = this.spell_power + (10*this.getPlayer_Level());
@@ -47,9 +39,15 @@ public class Mage extends Player{
     }
 
     public void On_Tick_Do() {
-        super.On_Tick_Do();
         this.mana.setCurrent_mana(Math.min(this.mana.getMana_pool(), this.mana.getCurrent_mana() + this.getPlayer_Level()));
         ///////////  continue
     }
 
+    @Override
+    public String toString() { return this.getCharacter(); }
+
+    @Override
+    public void interact(Tile other) {
+        other.interact(this);
+    }
 }

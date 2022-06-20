@@ -17,10 +17,15 @@ public class Game_Board {
         this.Traps = this.reader.getTraps();
     }
 
+    public void remove(Enemy enemy){
+        this.get
+    }
+
 
     @Override
     public String toString() {
-        return ///// the double arraylist, where each line and column are sorted() by their x and y
+        return this.arrays_Board.so
+        ///// the double arraylist, where each line and column are sorted() by their x and y
     }
 
     ////////////   check and see the methods in Tal's example files

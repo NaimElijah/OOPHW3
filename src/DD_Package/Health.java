@@ -22,7 +22,11 @@ public class Health {
         this.Health_pool = health_pool;
     }
 
-    public void setHealth_amount(int health_amount) {
-        this.Health_amount = health_amount;
+    public void setHealth_amount(int health_amount){
+        if( health_amount > this.Health_pool){
+            this.Health_amount = this.Health_pool;
+        }else {   /////  if health_amount is below 0 then the unit will be removed
+            this.Health_amount = health_amount;
+        }
     }
 }

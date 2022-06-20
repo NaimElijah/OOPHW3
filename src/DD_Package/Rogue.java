@@ -5,16 +5,8 @@ public class Rogue extends Player{
     protected int cost;
     protected int current_energy;
 
-    public Rogue(int cost, String na, String ch, int a_p, int d_p, int h_p, int x, int y){
-        this.setExperience(0);
-        this.setPlayer_Level(1);
-        this.setAttack_points(a_p);
-        this.setDefense_points(d_p);
-        this.setHealth(new Health(h_p, h_p));
-        this.setName(na);
-        this.setCharacter(ch);
-        this.setCoordinate(new Coordinate(x, y));
-
+    public Rogue(int cost, int x, int y, String name, int h_p, int attack_points, int defense_points) {
+        super(new Coordinate(x, y), name, new Health(h_p, h_p), attack_points, defense_points);
         this.cost = cost;
         this.current_energy = 100;
     }
@@ -37,8 +29,15 @@ public class Rogue extends Player{
     }
 
     public void On_Tick_Do() {
-        super.On_Tick_Do();
         this.current_energy = Math.min(this.current_energy + 10, 100);
         ///////////  continue
+    }
+
+    @Override
+    public String toString() { return this.getCharacter(); }
+
+    @Override
+    public void interact(Tile other) {
+        other.interact(this);
     }
 }

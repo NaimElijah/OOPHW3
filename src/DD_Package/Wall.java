@@ -2,12 +2,19 @@ package DD_Package;
 
 public class Wall extends Tile {
     public Wall(int x, int y){
-        this.setCharacter("#");
-        this.setCoordinate(new Coordinate(x, y));
+        super("#", new Coordinate(x, y));
     }
     @Override
-    public String toString() {
-        return this.getCharacter();
+    public String toString() { return this.getCharacter(); }
+
+
+    @Override
+    public void move(Tile tile) {
+        ///////   can't move into wall
     }
 
+    @Override
+    public void interact(Tile other) {
+        other.interact(this);
+    }
 }

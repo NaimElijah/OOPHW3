@@ -4,6 +4,11 @@ public abstract class Tile {
     protected String character;
     protected Coordinate coordinate;
 
+    protected Tile(String character, Coordinate coordinate){
+        this.character = character;
+        this.coordinate = coordinate;
+    }
+
     public String getCharacter(){
         return this.character;
     }
@@ -23,6 +28,16 @@ public abstract class Tile {
     public double getRange(Tile other){
         return Math.sqrt(Math.pow(this.coordinate.getX_coor() - other.getCoordinate().getX_coor(), 2) + Math.pow(this.coordinate.getY_coor() - other.getCoordinate().getY_coor(), 2));
     }
+
+    public abstract void move(Tile tile);
+
+    public void replace_positions(Tile other){
+        Coordinate temp = this.getCoordinate();
+        this.setCoordinate(other.getCoordinate());
+        other.setCoordinate(temp);
+    }
+
+    public abstract void interact(Tile other);
 
 
 }

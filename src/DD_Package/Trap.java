@@ -3,17 +3,9 @@ package DD_Package;
 public class Trap extends Enemy{
     protected TrapVisibility visibility;
 
-    public Trap(int vis_t, int invis_t, String na, String ch, int experience_value, int a_p, int d_p, int h_p, int x, int y){
-        this.setAttack_points(a_p);
-        this.setDefense_points(d_p);
-        this.setHealth(new Health(h_p, h_p));
-        this.setName(na);
-        this.setCharacter(ch);
-        this.setExperience_value(experience_value);
-        this.setCoordinate(new Coordinate(x, y));
-
+    protected Trap(int vis_t, int invis_t, String character, int x, int y, String name, int h_p, int attack_points, int defense_points, int experience_value) {
+        super(character, new Coordinate(x, y), name, new Health(h_p, h_p), attack_points, defense_points, experience_value);
         this.visibility = new TrapVisibility(vis_t, invis_t);
-
     }
 
     public TrapVisibility getVisibility() {
@@ -24,7 +16,6 @@ public class Trap extends Enemy{
     }
 
     public void On_Tick_Do() {
-        super.On_Tick_Do();
         this.visibility.setVisible(this.visibility.getTicks_count() < this.visibility.getVisibility_time());
         if (this.visibility.getTicks_count() == this.visibility.getVisibility_time() + this.visibility.getInvisibility_time()){ // visibility mode changing
             this.visibility.setTicks_count(0);
@@ -35,4 +26,12 @@ public class Trap extends Enemy{
         ///////////  continue
     }
 
+    @Override
+    public String toString() { return this.getCharacter(); }
+
+
+    @Override
+    public void interact(Tile other) {
+        other.interact(this);
+    }
 }

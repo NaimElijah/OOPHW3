@@ -56,75 +56,75 @@ public class InputReader {
                 }else if ('.' == (lines.get(i).charAt(j))) {   //// Empty
                     curr_line.add(new Empty(j, i));
                 }else if ('s' == (lines.get(i).charAt(j))) {   ////////////////////////////////  Monsters now:
-                    curr_monster = new Monster("Lannister Solider", "s", 3, 25, 8, 3, 80, j, i);
+                    curr_monster = new Monster(3, "s", j, i, "Lannister Solider", 80, 25, 3, 25);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 } else if ('k' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("Lannister Knight", "k", 4, 50, 14, 8, 200, j, i);
+                    curr_monster = new Monster(4, "k", j, i, "Lannister Knight", 200, 14, 8, 50);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('q' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("Queen’s Guard", "q", 5, 100, 20, 15, 400, j, i);
+                    curr_monster = new Monster(5, "q", j, i, "Queen’s Guard", 400, 20, 15, 100);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('z' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("Wright", "z", 3, 100, 30, 15, 600, j, i);
+                    curr_monster = new Monster(3, "z", j, i, "Wright", 600, 30, 15, 100);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 } else if ('b' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("Bear-Wright", "b", 4, 250, 75, 30, 1000, j, i);
+                    curr_monster = new Monster(4, "b", j, i, "Bear-Wright", 1000, 75, 30, 250);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('g' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("Giant-Wright", "g", 5, 500, 100, 40, 1500, j, i);
+                    curr_monster = new Monster(5, "g", j, i, "Giant-Wright", 1500, 100, 40, 500);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('w' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("White Walker", "w", 6, 1000, 150, 50, 2000, j, i);
+                    curr_monster = new Monster(6, "w", j, i, "White Walker", 2000, 150, 50, 1000);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 } else if ('M' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("The Mountain", "M", 6, 500, 60, 25, 1000, j, i);
+                    curr_monster = new Monster(6, "M", j, i, "The Mountain", 1000, 60, 25, 500);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('C' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("Queen Cersei", "C", 1, 1000, 10, 10, 100, j, i);
+                    curr_monster = new Monster(1, "C", j, i, "Queen Cersei", 100, 10, 10, 1000);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('K' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster("Night’s King", "k", 8, 5000, 300, 150, 5000, j, i);
+                    curr_monster = new Monster(8, "K", j, i, "Night’s King", 5000, 300, 150, 5000);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('B' == (lines.get(i).charAt(j))) {   ///////////////////////////////// Traps now:
-                    curr_trap = new Trap(1, 5, "Bonus Trap", "B", 250, 1, 1, 1, j, i);
+                    curr_trap = new Trap(1, 5, "B", j, i, "Bonus Trap", 1, 1, 1, 250);
                     this.Traps.add(curr_trap);
                     curr_line.add(curr_trap);
                 }else if ('Q' == (lines.get(i).charAt(j))) {
-                    curr_trap = new Trap(3, 7, "Queen’s Trap", "Q", 100, 50, 10, 250, j, i);
+                    curr_trap = new Trap(3, 7, "Q", j, i, "Queen’s Trap", 250, 50, 10, 100);
                     this.Traps.add(curr_trap);
                     curr_line.add(curr_trap);
                 }else if ('D' == (lines.get(i).charAt(j))) {
-                    curr_trap = new Trap(1, 10, "Death Trap", "D", 250, 100, 20, 500, j, i);
+                    curr_trap = new Trap(1, 10, "D", j, i, "Death Trap", 500, 100, 20, 250);
                     this.Traps.add(curr_trap);
                     curr_line.add(curr_trap);
                 }else if ('@' == (lines.get(i).charAt(j))) {   ///////////////////////////////   Player now:
                     if (this.player == 1){
-                        this.the_player = new Warrior(3, "Jon Snow", "@", 30, 4, 300, j, i);
+                        this.the_player = new Warrior(j, i, "Jon Snow", 300, 30, 4, 3);
                         curr_line.add(this.the_player);
                     }else if (this.player == 2){
-                        this.the_player = new Warrior(5, "The Hound", "@", 20, 6, 400, j, i);
+                        this.the_player = new Warrior(j, i, "The Hound", 400, 20, 6, 5);
                         curr_line.add(this.the_player);
                     } else if (this.player == 3){
-                        this.the_player = new Mage(300, 30, 15, 5, 6, "Melisandre", "@", 5, 1, 100, j, i);
+                        this.the_player = new Mage(j, i, "Melisandre", 100, 5, 1, 300, 30, 15, 5, 6);
                         curr_line.add(this.the_player);
                     }else if (this.player == 4){
-                        this.the_player = new Mage(150, 20, 20, 3, 4, "Thoros of Myr", "@", 25, 4, 250, j, i);
+                        this.the_player = new Mage(j, i, "Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4);
                         curr_line.add(this.the_player);
                     }else if (this.player == 5){
-                        this.the_player = new Rogue(20, "Arya Stark", "@", 40, 2, 150, j, i);
+                        this.the_player = new Rogue(20, j, i, "Arya Stark", 150, 40, 2);
                         curr_line.add(this.the_player);
                     }else if (this.player == 6){
-                        this.the_player = new Rogue(50, "Bronn", "@", 35, 3, 250, j, i);
+                        this.the_player = new Rogue(50, j, i, "Bronn", 250, 35, 3);
                         curr_line.add(this.the_player);
                     }
                 }
