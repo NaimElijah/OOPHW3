@@ -15,23 +15,38 @@ public class Trap extends Enemy{
         this.visibility = visibility;
     }
 
-    public void On_Tick_Do() {
+
+    @Override
+    public void On_Tick_Do(Player player, Game_Board game_board) {
         this.visibility.setVisible(this.visibility.getTicks_count() < this.visibility.getVisibility_time());
         if (this.visibility.getTicks_count() == this.visibility.getVisibility_time() + this.visibility.getInvisibility_time()){ // visibility mode changing
             this.visibility.setTicks_count(0);
         }else{
             this.visibility.setTicks_count(this.visibility.getTicks_count() + 1);
         }
-        if ()//////// if the range is within 2 then attack the Player
-        ///////////  continue
+//        if ()//////// if the range is within 2 then attack the Player   ///////  continue
+//        ///////////  continue
     }
 
-    @Override
-    public String toString() { return this.getCharacter(); }
 
+    @Override
+    public void move(Tile tile) {
+
+    }
 
     @Override
     public void interact(Tile other) {
         other.interact(this);
+    }
+
+
+    @Override
+    public void attack(Unit unit) {
+
+    }
+
+    @Override
+    public void defense(Unit unit) {
+
     }
 }

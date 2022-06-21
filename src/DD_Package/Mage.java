@@ -31,23 +31,31 @@ public class Mage extends Player{
         }else{
             this.mana.setCurrent_mana(this.mana.getCurrent_mana() - this.mana_cost);
             int hits = 0;
-            while(hits < this.hits_count && ){
-                //////////// continue casting the ability
-                hits += 1;
-            }
+//            while(hits < this.hits_count && ){   ///////  continue
+//                //////////// continue casting the ability
+//                hits += 1;
+//            }
         }
     }
 
-    public void On_Tick_Do() {
+    @Override
+    public void On_Tick_Do(Game_Board game) {
         this.mana.setCurrent_mana(Math.min(this.mana.getMana_pool(), this.mana.getCurrent_mana() + this.getPlayer_Level()));
         ///////////  continue
     }
 
     @Override
-    public String toString() { return this.getCharacter(); }
-
-    @Override
     public void interact(Tile other) {
         other.interact(this);
+    }
+
+    @Override
+    public void attack(Unit unit) {
+
+    }
+
+    @Override
+    public void defense(Unit unit) {
+
     }
 }

@@ -28,16 +28,24 @@ public class Rogue extends Player{
         }
     }
 
-    public void On_Tick_Do() {
+    @Override
+    public void On_Tick_Do(Game_Board game) {
         this.current_energy = Math.min(this.current_energy + 10, 100);
         ///////////  continue
     }
 
     @Override
-    public String toString() { return this.getCharacter(); }
-
-    @Override
     public void interact(Tile other) {
         other.interact(this);
+    }
+
+    @Override
+    public void attack(Unit unit) {
+
+    }
+
+    @Override
+    public void defense(Unit unit) {
+
     }
 }

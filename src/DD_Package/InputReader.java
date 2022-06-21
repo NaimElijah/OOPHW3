@@ -20,7 +20,11 @@ public class InputReader {
     public InputReader(String file_path, int player){
         this.file_path = file_path;
         this.player = player;
+        this.Monsters = new ArrayList<Monster>();
+        this.Traps = new ArrayList<Trap>();
     }
+
+    public void setFile_path(String file_path) { this.file_path = file_path; }   ///////  we can use this to change to the next level and then perform Read() again so the next level loads up
 
     public Player getThe_player() {
         return this.the_player;
@@ -33,13 +37,14 @@ public class InputReader {
     }
 
     /////////////////////////////////  listen to my recordings and read the rest of the assignment before continuation  ///////////////////
-    public ArrayList<ArrayList<Tile>> Read(){  ////  maybe just use the Read() again when we move up a level
+    public void Read(Game_Board game_board){  ////  maybe just use the Read() again when we move up a level, before returned ArrayList<ArrayList<Tile>>
         ArrayList<ArrayList<Tile>> res = new ArrayList<ArrayList<Tile>>();
         List<String> lines = Collections.emptyList();
 
         try{
             lines = Files.readAllLines(Paths.get(this.file_path));
         }catch (IOException e){
+            System.out.println("Game over");     //////  can't read "level<i>.txt" because it doesnt exist
             System.out.println(e.getMessage() + "\n" + e.getStackTrace());
         }
 
@@ -48,7 +53,7 @@ public class InputReader {
         Monster curr_monster;
         Trap curr_trap;
 
-        for(int i = 0; i < amount_of_lines; i++) {
+        for(int i = 0; i < amount_of_lines; i++) {     //////////   if needed we wil give each of the units the game_board, for connection reasons
             ArrayList<Tile> curr_line = new ArrayList<Tile>();
             for(int j=0; j < line_length; j++) {
                 if ('#' == (lines.get(i).charAt(j))) {   //// Wall
@@ -57,6 +62,7 @@ public class InputReader {
                     curr_line.add(new Empty(j, i));
                 }else if ('s' == (lines.get(i).charAt(j))) {   ////////////////////////////////  Monsters now:
                     curr_monster = new Monster(3, "s", j, i, "Lannister Solider", 80, 25, 3, 25);
+//                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 } else if ('k' == (lines.get(i).charAt(j))) {
@@ -131,6 +137,6 @@ public class InputReader {
             }
             res.add(curr_line);
         }
-        return res;
+        game_board.setArrays_Board(res);
     }
 }

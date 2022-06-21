@@ -15,6 +15,7 @@ public class Monster extends Enemy{
         this.vision_range = vision_range;
     }
 
+
     @Override
     public void On_Tick_Do(Player player, Game_Board game_board) {
         if(this.getRange(player) < this.vision_range){
@@ -51,6 +52,9 @@ public class Monster extends Enemy{
             }
         }
     }
+
+
+
     @Override
     public void move(Tile tile){
         tile.move(this);
@@ -58,17 +62,8 @@ public class Monster extends Enemy{
 
 
     @Override
-    public String toString() { return this.getCharacter(); }
-
-
-    @Override
     public void interact(Tile other) {
         other.interact(this);
-    }
-
-    @Override
-    public void On_Tick_Do() {
-
     }
 
     @Override

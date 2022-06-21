@@ -9,6 +9,12 @@ public class Mana {
         this.current_mana = current_mana;
     }
 
+
+    @Override
+    public String toString() {
+        return this.current_mana + "/" + this.mana_pool;
+    }
+
     public int getMana_pool() {
         return this.mana_pool;
     }

@@ -32,6 +32,8 @@ public abstract class Player extends Unit{
         }
     }
 
+    public abstract void On_Tick_Do(Game_Board game);
+
 
     @Override
     public void move(Tile tile){

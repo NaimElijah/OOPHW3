@@ -9,6 +9,9 @@ public abstract class Tile {
         this.coordinate = coordinate;
     }
 
+    @Override
+    public String toString() { return this.getCharacter(); }
+
     public String getCharacter(){
         return this.character;
     }

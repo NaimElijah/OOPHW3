@@ -4,8 +4,6 @@ public class Empty extends Tile {
     public Empty(int x, int y){
         super(".", new Coordinate(x, y));
     }
-    @Override
-    public String toString() { return this.getCharacter(); }
 
 
     @Override

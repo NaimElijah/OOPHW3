@@ -35,15 +35,13 @@ public class Warrior extends Player{
         this.getMessageCallback().send("");  /////////////////  the message !!!
     }
 
-    public void On_Tick_Do(){
+    @Override
+    public void On_Tick_Do(Game_Board game) {
         if(this.remaining_cooldown > 0){
             this.remaining_cooldown = this.remaining_cooldown - 1;
         }
         ///////////  continue
     }
-
-    @Override
-    public String toString() { return this.getCharacter(); }
 
 
     @Override
@@ -53,4 +51,13 @@ public class Warrior extends Player{
         this.getMessageCallback().send("");  /////////////////  the message !!!   if needed !!
     }
 
+    @Override
+    public void attack(Unit unit) {  /////  activates the defend of the unit we're attcking and maybe also give the rolled attack in the arguments to the attacked's defense method
+
+    }
+
+    @Override
+    public void defense(Unit unit) {   //////////   here we can also at the end do: this.getMessageCallback.send("the message")
+
+    }
 }

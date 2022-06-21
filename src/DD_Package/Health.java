@@ -10,6 +10,11 @@ public class Health {
     }
 
 
+    @Override
+    public String toString() {
+        return this.Health_amount + "/" + this.Health_pool;
+    }
+
     public int getHealth_pool() {
         return this.Health_pool;
     }

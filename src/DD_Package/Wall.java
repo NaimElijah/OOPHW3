@@ -4,9 +4,6 @@ public class Wall extends Tile {
     public Wall(int x, int y){
         super("#", new Coordinate(x, y));
     }
-    @Override
-    public String toString() { return this.getCharacter(); }
-
 
     @Override
     public void move(Tile tile) {
