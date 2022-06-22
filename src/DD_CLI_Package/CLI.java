@@ -107,14 +107,8 @@ public class CLI {
 
                     }else if (move.equals("q")) { }  ////// do nothing !!  might delete this if because it will do nothing and print again anyway
 
-                    //////  now do the tick_do of the player, then run over the monsters and do each of their ticks, same with the traps.
-                    game.getThe_player().On_Tick_Do(game);
-                    for(Monster monster:game.getMonsters()){
-                        monster.On_Tick_Do(game.getThe_player(), game);
-                    }
-                    for (Trap trap: game.getTraps()){
-                        trap.On_Tick_Do(game.getThe_player(), game);
-                    }
+                    //////  now do the on_tick_do's of all the units in the Game_Board game
+                    game.game_tick();
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -130,10 +124,7 @@ public class CLI {
 
             System.out.println("Game over");
 
-
-
-
-            System.out.println("Do you want to play again ? (enter: 'yes' or 'no')");
+            System.out.println("Do you want to play again ?  (enter 'yes' to play again, enter anything else to quit)");
             String yes_or_no = reader.nextLine();
             is_game_again = yes_or_no == "yes";
         }

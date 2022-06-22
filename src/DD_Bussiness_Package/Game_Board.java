@@ -35,6 +35,18 @@ public class Game_Board {
         //////  make it ("X"), in this case the game ends, it is dealt with in another place, if not, deal with it here
     }
 
+
+    public void game_tick (){
+        this.getThe_player().On_Tick_Do(this);
+        for(Monster monster:this.getMonsters()){
+            monster.On_Tick_Do(this.getThe_player(), this);
+        }
+        for (Trap trap: this.getTraps()){
+            trap.On_Tick_Do(this.getThe_player(), this);
+        }
+    }
+
+
     public void arrange_board(){      ///////////////    updates the 2d arraylist(the board)
         ArrayList<ArrayList<Tile>> new_arrays_Board = new ArrayList<ArrayList<Tile>>();
         for(int i=0; i< this.arrays_Board.size(); i++){
