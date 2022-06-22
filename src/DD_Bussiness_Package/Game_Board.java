@@ -30,9 +30,8 @@ public class Game_Board {
     ///////   if in Monsters, make it empty(".") and remove it from it's arraylist, if in Traps, make it empty(".") and remove it from it's arraylist.
     }
 
-    public void remove_player(Player player){   ///////  continue
-        /////////////  maybe make a dead player that extends Player, but there's no need for that, we can change the char of the Player and end the game
-        //////  make it ("X"), in this case the game ends, it is dealt with in another place, if not, deal with it here
+    public void remove_player(){   ///////  continue
+        this.getThe_player().setCharacter("X");
     }
 
 

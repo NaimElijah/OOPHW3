@@ -59,7 +59,7 @@ public abstract class Player extends Unit{
 
     public void on_death(Game_Board game_board){   ////////////////  continue
         //////   make it "X" and print with .send(game_board), game over is sent in the CLI, if not do .send("Game Over") here
-        game_board.remove_player(this);
+        game_board.remove_player();
     }
 
     @Override
