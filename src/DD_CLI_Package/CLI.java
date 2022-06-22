@@ -69,14 +69,11 @@ public class CLI {
             File directory = new File("D:\\\\levels_dir\\\\levels_dir"); ///////// counting how many levels are there in the levels directory
 //            File directory = new File(args[0]);      /////////   counting how many levels are there in the levels directory
             int fileCount= Objects.requireNonNull(directory.list()).length;
-//            System.out.println("****  File Count: "+fileCount);
+//            System.out.println("****  level txt's found in levels directory: "+ fileCount);
 
 
-            int level = 0;
-
-            for (int i = 0; i < fileCount; i++) {  ////////////////////////////////////////////////////   change in levels
-                level++;
-                Game_Board game = new Game_Board("D:\\levels_dir\\levels_dir\\level" + level +".txt", player);   ////////  gets the file_path and the player and builds
+            for (int line = 1; line <= fileCount; line++) {  ////////////////////////////////////////////////////   change in levels
+                Game_Board game = new Game_Board("D:\\levels_dir\\levels_dir\\level" + line +".txt", player);   ////////  gets the file_path and the player and builds
 //                Game_Board game = new Game_Board(args[0] + "\\level" + level +".txt", player);   ////////  gets the file_path and the player and builds
 
                 String move = "";

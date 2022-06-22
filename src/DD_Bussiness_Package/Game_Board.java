@@ -36,7 +36,7 @@ public class Game_Board {
     }
 
 
-    public void game_tick (){
+    public void game_tick (){       /////////  does the on_tick_do's of all the units in this Game_Board
         this.getThe_player().On_Tick_Do(this);
         for(Monster monster:this.getMonsters()){
             monster.On_Tick_Do(this.getThe_player(), this);
