@@ -52,13 +52,4 @@ public class Mage extends Player{
         return super.description() + "        Mana: " + this.mana.getCurrent_mana() + "/" + this.mana.getMana_pool() + "        Spell Power: " + this.spell_power + "\n";
     }
 
-    @Override
-    public void attack(Unit unit, int attack_amount) {
-
-    }
-
-    @Override
-    public void defense(Unit unit, int defense_amount) {
-
-    }
 }

@@ -24,8 +24,6 @@ public class Trap extends Enemy{
         }
     }
 
-
-
     @Override
     public void On_Tick_Do(Player player, Game_Board game_board) {
         this.visibility.setVisible(this.visibility.getTicks_count() < this.visibility.getVisibility_time());
@@ -46,13 +44,4 @@ public class Trap extends Enemy{
         return super.description();  ////////  if we don't need to .send(what we return here) then delete this method here, it's already in Enemy.
     }
 
-    @Override
-    public void attack(Unit unit, int attack_amount) {
-
-    }
-
-    @Override
-    public void defense(Unit unit, int defense_amount) {
-
-    }
 }

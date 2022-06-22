@@ -28,7 +28,7 @@ public class Rogue extends Player{
             this.getMessageCallback().send("You don't have enough Energy in order to use your ability");
         }else{
             this.current_energy = this.current_energy - this.cost;
-            /////////// continue casting the ability
+            ////////////////////////////////////////////////////////////// continue casting the ability
         }
     }
 
@@ -44,13 +44,4 @@ public class Rogue extends Player{
         return res;
     }
 
-    @Override
-    public void attack(Unit unit, int attack_amount) {
-
-    }
-
-    @Override
-    public void defense(Unit unit, int defense_amount) {
-
-    }
 }

@@ -41,7 +41,7 @@ public class Warrior extends Player{
             ArrayList<Enemy> enemies_in_3_range = this.get_enemies_in_n_range(3, game_board);
             double index_attacked = Math.floor(Math.random()*(enemies_in_3_range.size() + 1));  /// the random enemy
 
-            ////////// continue casting the ability
+            ////////////////////////////////////////// continue casting the ability
         }
 
         this.getMessageCallback().send("");  ////////////////////////////////////////////////////////  the message !!!
@@ -60,13 +60,5 @@ public class Warrior extends Player{
         return super.description() + "        Cooldown: " + this.remaining_cooldown + "/" + this.ability_cooldown + "\n";
     }
 
-    @Override
-    public void attack(Unit unit, int attack_amount) {  /////  activates the defend of the unit we're attcking and maybe also give the rolled attack in the arguments to the attacked's defense method
 
-    }
-
-    @Override
-    public void defense(Unit unit, int defense_amount) {   //////////   here we can also at the end do: this.getMessageCallback.send("the message")
-
-    }
 }

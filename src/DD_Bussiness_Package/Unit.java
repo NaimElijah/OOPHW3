@@ -57,12 +57,25 @@ public abstract class Unit extends Tile {
 
     public MessageCallback getMessageCallback() { return this.messageCallback; }
 
+
+
     @Override
     public void move(Tile tile) {
         tile.move(this);   //////////////////////////////  and then it goes to move(enemy) or move(player), there it attacks, does nothing...
     }
 
-    public abstract void attack(Unit unit, int attack_amount);
-    public abstract void defense(Unit unit, int defense_amount);    ////  see which ones(maybe 2) aren't connected\overriding to this abstract method
+
+
+
+
+    public void attack(Unit unit, int attack_amount){  /////////  later see where to do the .send(messages), not complicated
+        unit.defense(this, attack_amount);
+    }
+
+
+    public void defense(Unit unit, int attack_amount){  /////////  later see where to do the .send(messages), not complicated
+        //////// subtract and use .send(messages)
+    }
+
 
 }

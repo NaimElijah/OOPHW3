@@ -60,14 +60,4 @@ public class Monster extends Enemy{
         return super.description() + "        Vision Range: " + this.vision_range + "\n";
     }
 
-    @Override
-    public void attack(Unit unit, int attack_amount) {
-
-
-    }
-
-    @Override
-    public void defense(Unit unit, int defense_amount) {
-
-    }
 }
