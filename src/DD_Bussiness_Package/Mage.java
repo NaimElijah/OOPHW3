@@ -1,4 +1,4 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 public class Mage extends Player{
     protected Mana mana;
@@ -35,7 +35,7 @@ public class Mage extends Player{
         }else{
             this.mana.setCurrent_mana(this.mana.getCurrent_mana() - this.mana_cost);
             int hits = 0;
-//            while(hits < this.hits_count && ){   ///////  continue
+//            while(hits < this.hits_count && ){   /////////////////////////////////////////  continue
 //                //////////// continue casting the ability
 //                hits += 1;
 //            }
@@ -44,13 +44,7 @@ public class Mage extends Player{
 
     @Override
     public void On_Tick_Do(Game_Board game) {
-        this.mana.setCurrent_mana(Math.min(this.mana.getMana_pool(), this.mana.getCurrent_mana() + this.getPlayer_Level()));  //// might add a bit more mana regeneration
-        ///////////  continue
-    }
-
-    @Override
-    public void interact(Tile other) {
-        other.interact(this);
+        this.mana.setCurrent_mana(Math.min(this.mana.getMana_pool(), this.mana.getCurrent_mana() + this.getPlayer_Level()));
     }
 
     @Override
@@ -59,12 +53,12 @@ public class Mage extends Player{
     }
 
     @Override
-    public void attack(Unit unit) {
+    public void attack(Unit unit, int attack_amount) {
 
     }
 
     @Override
-    public void defense(Unit unit) {
+    public void defense(Unit unit, int defense_amount) {
 
     }
 }

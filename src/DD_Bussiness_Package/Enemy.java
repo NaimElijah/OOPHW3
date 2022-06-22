@@ -1,4 +1,4 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 public abstract class Enemy extends Unit{
     protected int Experience_value;
@@ -23,9 +23,23 @@ public abstract class Enemy extends Unit{
         this.Experience_value = experience_value;
     }
 
-//    public void on_death(Game_Board game_board){   /////////  continue
-//        game_board.remove(this);
-//    }
+
+
+    public void on_death(Game_Board game_board){   //////////////////  continue
+        game_board.remove(this);   ///////  make it new Empty(coordinates of the player) and the set the Coordinate of the player to where the now dead monster was
+    }
+
+
+    @Override
+    public void move(Player player) {  /////////  confrontation
+        this.attack(player, (int)(Math.floor(Math.random()*(this.getAttack_points() + 1))));
+    }
+
+    @Override
+    public void move(Enemy enemy) { } ////////  then don't let it move to here, do nothing
+
+
+
 
     public abstract void On_Tick_Do(Player player, Game_Board game_board);
 

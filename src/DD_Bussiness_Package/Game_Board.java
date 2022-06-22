@@ -1,4 +1,6 @@
-package DD_Package;
+package DD_Bussiness_Package;
+
+import DD_CLI_Package.InputReader;
 
 import java.util.ArrayList;
 
@@ -17,9 +19,21 @@ public class Game_Board {
         this.Traps = this.reader.getTraps();
     }
 
-//    public void remove(Enemy enemy){   ///////  continue
-//        this.ge ///////   if in Monsters, make it empty(".") and remove it from it's arraylist, if in Traps, make it empty(".") and remove it from it's arraylist.
-//    }
+    public void remove(Enemy enemy){
+        enemy.replace_positions(this.getThe_player());
+        this.getArrays_Board().get(enemy.getCoordinate().getY_coor()).set(enemy.getCoordinate().getX_coor(), new Empty(enemy.getCoordinate().getX_coor(), enemy.getCoordinate().getY_coor()));
+        if (this.getMonsters().contains(enemy)){
+            this.getMonsters().remove(enemy);
+        }else {
+            this.getTraps().remove(enemy);
+        }
+    ///////   if in Monsters, make it empty(".") and remove it from it's arraylist, if in Traps, make it empty(".") and remove it from it's arraylist.
+    }
+
+    public void remove_player(Player player){   ///////  continue
+        /////////////  maybe make a dead player that extends Player, but there's no need for that, we can change the char of the Player and end the game
+        //////  make it ("X"), in this case the game ends, it is dealt with in another place, if not, deal with it here
+    }
 
     public void arrange_board(){      ///////////////    updates the 2d arraylist(the board)
         ArrayList<ArrayList<Tile>> new_arrays_Board = new ArrayList<ArrayList<Tile>>();

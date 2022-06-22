@@ -1,4 +1,4 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 public class Health {
     protected int Health_pool;

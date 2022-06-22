@@ -1,4 +1,4 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 public class Rogue extends Player{
 
@@ -35,12 +35,6 @@ public class Rogue extends Player{
     @Override
     public void On_Tick_Do(Game_Board game) {
         this.current_energy = Math.min(this.current_energy + 10, 100);
-        ///////////  continue
-    }
-
-    @Override
-    public void interact(Tile other) {
-        other.interact(this);
     }
 
     @Override
@@ -51,12 +45,12 @@ public class Rogue extends Player{
     }
 
     @Override
-    public void attack(Unit unit) {
+    public void attack(Unit unit, int attack_amount) {
 
     }
 
     @Override
-    public void defense(Unit unit) {
+    public void defense(Unit unit, int defense_amount) {
 
     }
 }

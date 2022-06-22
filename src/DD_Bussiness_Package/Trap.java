@@ -1,9 +1,9 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 public class Trap extends Enemy{
     protected TrapVisibility visibility;
 
-    protected Trap(int vis_t, int invis_t, String character, int x, int y, String name, int h_p, int attack_points, int defense_points, int experience_value) {
+    public Trap(int vis_t, int invis_t, String character, int x, int y, String name, int h_p, int attack_points, int defense_points, int experience_value) {
         super(character, new Coordinate(x, y), name, new Health(h_p, h_p), attack_points, defense_points, experience_value);
         this.visibility = new TrapVisibility(vis_t, invis_t);
     }
@@ -24,6 +24,8 @@ public class Trap extends Enemy{
         }
     }
 
+
+
     @Override
     public void On_Tick_Do(Player player, Game_Board game_board) {
         this.visibility.setVisible(this.visibility.getTicks_count() < this.visibility.getVisibility_time());
@@ -32,19 +34,10 @@ public class Trap extends Enemy{
         }else{
             this.visibility.setTicks_count(this.visibility.getTicks_count() + 1);
         }
-//        if ()//////// if the range is within 2 then attack the Player   ///////  continue
-//        ///////////  continue
-    }
 
-
-    @Override
-    public void move(Tile tile) {
-
-    }
-
-    @Override
-    public void interact(Tile other) {
-        other.interact(this);
+        if(this.getRange(player) < 2){   /////  if it's close to the player, it attacks the player
+            this.attack(player, (int)(Math.floor(Math.random()*(this.getAttack_points() + 1))));
+        }
     }
 
 
@@ -54,12 +47,12 @@ public class Trap extends Enemy{
     }
 
     @Override
-    public void attack(Unit unit) {
+    public void attack(Unit unit, int attack_amount) {
 
     }
 
     @Override
-    public void defense(Unit unit) {
+    public void defense(Unit unit, int defense_amount) {
 
     }
 }

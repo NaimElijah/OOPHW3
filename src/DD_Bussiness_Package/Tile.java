@@ -1,4 +1,4 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 public abstract class Tile {
     protected String character;
@@ -33,14 +33,13 @@ public abstract class Tile {
     }
 
     public abstract void move(Tile tile);
+    public abstract void move(Enemy enemy);  //////  in case we encounter an Enemy
+    public abstract void move(Player player);  //////  in case we encounter a Player
 
     public void replace_positions(Tile other){
         Coordinate temp = this.getCoordinate();
         this.setCoordinate(other.getCoordinate());
         other.setCoordinate(temp);
     }
-
-    public abstract void interact(Tile other);
-
 
 }

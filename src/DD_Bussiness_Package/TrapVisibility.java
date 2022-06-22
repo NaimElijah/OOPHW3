@@ -1,4 +1,4 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 public class TrapVisibility {
     protected int visibility_time;

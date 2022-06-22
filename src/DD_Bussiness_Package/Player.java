@@ -1,4 +1,4 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 import java.util.ArrayList;
 
@@ -34,12 +34,12 @@ public abstract class Player extends Unit{
     public ArrayList<Enemy> get_enemies_in_n_range (int range, Game_Board game_board){  //////  maybe give the player the board so we can access the Enemies
         ArrayList<Enemy> res = new ArrayList<Enemy>();
         for (Monster m: game_board.getMonsters()){
-            if (m.getRange(game_board.getThe_player()) < 3){
+            if (m.getRange(game_board.getThe_player()) < range){
                 res.add(m);
             }
         }
         for (Trap t: game_board.getTraps()){
-            if (t.getRange(game_board.getThe_player()) < 3){
+            if (t.getRange(game_board.getThe_player()) < range){
                 res.add(t);
             }
         }
@@ -53,13 +53,22 @@ public abstract class Player extends Unit{
         }
     }
 
+
     public abstract void On_Tick_Do(Game_Board game);
 
+    public void on_death(Game_Board game_board){   ////////////////  continue
+        //////   make it "X" and print with .send(game_board), game over is sent in the CLI, if not do .send("Game Over") here
+        game_board.remove_player(this);
+    }
 
     @Override
-    public void move(Tile tile){
-        tile.move(this);
+    public void move(Enemy enemy) {  ////////////  confrontation
+        this.attack(enemy, (int)(Math.floor(Math.random()*(this.getAttack_points() + 1))));
     }
+
+    @Override
+    public void move(Player player) { } ///////////////  won't reach another player in this game version but in the future we want to make another player so this will be useful !!
+    ////////  then don't let it move to here, do nothing
 
 
 

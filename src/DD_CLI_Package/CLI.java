@@ -1,4 +1,8 @@
-package DD_Package;
+package DD_CLI_Package;
+import DD_Bussiness_Package.Game_Board;
+import DD_Bussiness_Package.Monster;
+import DD_Bussiness_Package.Trap;
+
 import java.io.File;
 import java.util.Objects;
 import java.util.Scanner;
@@ -87,23 +91,21 @@ public class CLI {
                     int curr_playerY = game.getThe_player().getCoordinate().getY_coor();
 
                     if(move.equals("w")){    //////  up !!
-                        game.getThe_player().interact(game.getArrays_Board().get(curr_playerY-1).get(curr_playerX));
+                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY-1).get(curr_playerX));
 
                     } else if (move.equals("s")) {    ////// down !!
-                        game.getThe_player().interact(game.getArrays_Board().get(curr_playerY+1).get(curr_playerX));
+                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY+1).get(curr_playerX));
 
                     }else if (move.equals("a")) {    ////// left !!
-                        game.getThe_player().interact(game.getArrays_Board().get(curr_playerY).get(curr_playerX-1));
+                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY).get(curr_playerX-1));
 
                     }else if (move.equals("d")) {    ////// right !!
-                        game.getThe_player().interact(game.getArrays_Board().get(curr_playerY).get(curr_playerX+1));
+                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY).get(curr_playerX+1));
 
                     }else if (move.equals("e")) {    ////// special ability !!
                         game.getThe_player().Ability_Cast(game);
 
-                    }else if (move.equals("q")) {    ////// do nothing !!
-
-                    }
+                    }else if (move.equals("q")) { }  ////// do nothing !!  might delete this if because it will do nothing and print again anyway
 
                     //////  now do the tick_do of the player, then run over the monsters and do each of their ticks, same with the traps.
                     game.getThe_player().On_Tick_Do(game);

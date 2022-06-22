@@ -1,4 +1,4 @@
-package DD_Package;
+package DD_Bussiness_Package;
 
 import java.util.ArrayList;
 
@@ -19,6 +19,8 @@ public class Warrior extends Player{
         ////////////////////////////  now addons  ////////////////////////////
         this.remaining_cooldown = 0;
         this.getHealth().setHealth_pool(this.getHealth().getHealth_pool() + (5*this.getPlayer_Level()));
+        this.getHealth().setHealth_amount(this.getHealth().getHealth_pool());
+
         this.setAttack_points(this.getAttack_points() + (2*this.getPlayer_Level()));
         this.setDefense_points(this.getDefense_points() + this.getPlayer_Level());
 
@@ -42,7 +44,7 @@ public class Warrior extends Player{
             ////////// continue casting the ability
         }
 
-        this.getMessageCallback().send("");  /////////////////  the message !!!
+        this.getMessageCallback().send("");  ////////////////////////////////////////////////////////  the message !!!
     }
 
     @Override
@@ -50,16 +52,8 @@ public class Warrior extends Player{
         if(this.remaining_cooldown > 0){
             this.remaining_cooldown = this.remaining_cooldown - 1;
         }
-        ///////////  continue
     }
 
-
-    @Override
-    public void interact(Tile other) {   ///////   use attack() and defense() if needed
-        other.interact(this);
-
-        this.getMessageCallback().send("");  /////////////////  the message !!!   if needed !!
-    }
 
     @Override
     public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
@@ -67,12 +61,12 @@ public class Warrior extends Player{
     }
 
     @Override
-    public void attack(Unit unit) {  /////  activates the defend of the unit we're attcking and maybe also give the rolled attack in the arguments to the attacked's defense method
+    public void attack(Unit unit, int attack_amount) {  /////  activates the defend of the unit we're attcking and maybe also give the rolled attack in the arguments to the attacked's defense method
 
     }
 
     @Override
-    public void defense(Unit unit) {   //////////   here we can also at the end do: this.getMessageCallback.send("the message")
+    public void defense(Unit unit, int defense_amount) {   //////////   here we can also at the end do: this.getMessageCallback.send("the message")
 
     }
 }
