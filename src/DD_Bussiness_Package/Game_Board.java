@@ -36,11 +36,23 @@ public class Game_Board {
 
 
     public void game_tick (){       /////////  does the on_tick_do's of all the units in this Game_Board
-        this.getThe_player().On_Tick_Do(this);
+        if (this.getThe_player().getHealth().getHealth_amount() <= 0){
+            this.getThe_player().on_death(this);
+        }else {
+            this.getThe_player().On_Tick_Do(this);
+        }
         for(Monster monster:this.getMonsters()){
+            if(monster.getHealth().getHealth_amount() <= 0){
+                monster.on_death(this);
+                continue;
+            }
             monster.On_Tick_Do(this.getThe_player(), this);
         }
         for (Trap trap: this.getTraps()){
+            if(trap.getHealth().getHealth_amount() <= 0){
+                trap.on_death(this);
+                continue;
+            }
             trap.On_Tick_Do(this.getThe_player(), this);
         }
     }

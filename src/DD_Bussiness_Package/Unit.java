@@ -69,11 +69,22 @@ public abstract class Unit extends Tile {
 
 
     public void attack(Unit unit, int attack_amount){  /////////  later see where to do the .send(messages), not complicated
+        this.getMessageCallback().send(this.getName()+ " engaged in combat with " + unit.getName()); ///////////   message
+        this.getMessageCallback().send(this.description() + "\n" + unit.description()); ///////////   message
         unit.defense(this, attack_amount);
+        this.getMessageCallback().send(this.getName()+ "rolled" + attack_amount + ); ///////////   message
     }
 
 
+
     public void defense(Unit unit, int attack_amount){  /////////  later see where to do the .send(messages), not complicated
+        int defense_amount = (int)(Math.floor(Math.random()*(this.getDefense_points() + 1)));
+        int damage = attack_amount - defense_amount;
+        if ( damage > 0){
+            this.getHealth().setHealth_amount(this.getHealth().getHealth_amount() - damage);
+            this.getMessageCallback().send(""); ///////////   message
+        }
+
         //////// subtract and use .send(messages)
     }
 

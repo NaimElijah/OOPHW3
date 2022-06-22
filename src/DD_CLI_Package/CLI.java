@@ -87,7 +87,7 @@ public class CLI {
                     int curr_playerX = game.getThe_player().getCoordinate().getX_coor();
                     int curr_playerY = game.getThe_player().getCoordinate().getY_coor();
 
-                    if(move.equals("w")){    //////  up !!
+                    if(move.equals("w")){    //////  up !!                     ///////  can easily make it 2 or more players
                         game.getThe_player().move(game.getArrays_Board().get(curr_playerY-1).get(curr_playerX));
 
                     } else if (move.equals("s")) {    ////// down !!
@@ -115,6 +115,7 @@ public class CLI {
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
                 if (!is_alive){
+                    System.out.println(game);     //////  showing the game board
                     break;
                 }
             }

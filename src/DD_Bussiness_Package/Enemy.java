@@ -32,7 +32,7 @@ public abstract class Enemy extends Unit{
 
     @Override
     public void move(Player player) {  /////////  confrontation
-        this.attack(player, (int)(Math.floor(Math.random()*(this.getAttack_points() + 1))));
+        player.attack(this, (int)(Math.floor(Math.random()*(player.getAttack_points() + 1))));    ////////////////    hhheerrreee  ookkk
     }
 
     @Override

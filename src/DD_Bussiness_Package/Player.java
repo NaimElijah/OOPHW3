@@ -63,8 +63,8 @@ public abstract class Player extends Unit{
     }
 
     @Override
-    public void move(Enemy enemy) {  ////////////  confrontation
-        this.attack(enemy, (int)(Math.floor(Math.random()*(this.getAttack_points() + 1))));
+    public void move(Enemy enemy) {  ////////////  confrontation        /////   never reached  !!!!!!!!!!!!!!!!!!!!!!!!!!
+//        enemy.attack(this, (int)(Math.floor(Math.random()*(enemy.getAttack_points() + 1))));   /////   never reached  !!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     @Override
