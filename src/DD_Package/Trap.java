@@ -15,6 +15,14 @@ public class Trap extends Enemy{
         this.visibility = visibility;
     }
 
+    @Override
+    public String toString() {
+        if (this.visibility.getVisible()){
+            return this.getCharacter();
+        }else {
+            return ".";
+        }
+    }
 
     @Override
     public void On_Tick_Do(Player player, Game_Board game_board) {
@@ -39,6 +47,11 @@ public class Trap extends Enemy{
         other.interact(this);
     }
 
+
+    @Override
+    public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
+        return super.description();  ////////  if we don't need to .send(what we return here) then delete this method here, it's already in Enemy.
+    }
 
     @Override
     public void attack(Unit unit) {

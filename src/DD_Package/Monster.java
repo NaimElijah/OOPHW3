@@ -19,7 +19,7 @@ public class Monster extends Enemy{
     @Override
     public void On_Tick_Do(Player player, Game_Board game_board) {
         if(this.getRange(player) < this.vision_range){
-            if(this.getRange(player) == Math.sqrt(1)){
+            if(this.getRange(player) <= 1){   /////  next to each other
                 this.attack(player);
             }else {
                 int dx = this.getCoordinate().getX_coor() - player.getCoordinate().getX_coor();
@@ -64,6 +64,11 @@ public class Monster extends Enemy{
     @Override
     public void interact(Tile other) {
         other.interact(this);
+    }
+
+    @Override
+    public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
+        return super.description() + "        Vision Range: " + this.vision_range + "\n";
     }
 
     @Override

@@ -11,6 +11,10 @@ public abstract class Enemy extends Unit{
 //        this.enemyDeathCallback = this.on_death(game_board);   //////  may not be needed !
     }
 
+    public String description(){
+        return super.description() + "\n" + "        Experience Value: " + this.Experience_value;
+    }
+
     public int getExperience_value(){
         return this.Experience_value;
     }

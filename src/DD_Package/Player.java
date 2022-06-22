@@ -1,5 +1,7 @@
 package DD_Package;
 
+import java.util.ArrayList;
+
 public abstract class Player extends Unit{
     protected int Experience;
     protected int Player_Level;
@@ -8,6 +10,10 @@ public abstract class Player extends Unit{
         super("@", coordinate, name, health, attack_points, defense_points);
         this.Experience = 0;
         this.Player_Level = 1;
+    }
+
+    public String description(){
+        return  super.description() + "        Level: " + this.Player_Level + "\n" + "        Experience: " + this.Experience + "/" + (50*this.Player_Level);
     }
 
 
@@ -23,7 +29,22 @@ public abstract class Player extends Unit{
         this.setDefense_points(this.getDefense_points() + this.Player_Level);
     }
 
-    public abstract void Ability_Cast();
+    public abstract void Ability_Cast(Game_Board game_board);
+
+    public ArrayList<Enemy> get_enemies_in_n_range (int range, Game_Board game_board){  //////  maybe give the player the board so we can access the Enemies
+        ArrayList<Enemy> res = new ArrayList<Enemy>();
+        for (Monster m: game_board.getMonsters()){
+            if (m.getRange(game_board.getThe_player()) < 3){
+                res.add(m);
+            }
+        }
+        for (Trap t: game_board.getTraps()){
+            if (t.getRange(game_board.getThe_player()) < 3){
+                res.add(t);
+            }
+        }
+        return res;
+    }
 
     public void Experience_Addition(int Addition){   ////////  only needed in this class, might need to be in every player class, think it's ok here
         this.Experience = this.Experience + Addition;

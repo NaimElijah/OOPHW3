@@ -6,11 +6,10 @@ public abstract class Unit extends Tile {
     protected int Attack_points;
     protected int Defense_points;
 
-    protected MessageCallback messageCallback;   ////////  initialize later with a method  !!!!!
+    protected MessageCallback messageCallback;    ////////  initialized later with a method when a Unit is created  !!!!!
 
     protected Unit(String character, Coordinate coordinate, String name, Health health, int attack_points, int defense_points){
         super(character, coordinate);
-        this.messageCallback = System.out::println;  //////  see Tal's answer !!!!!!!!!!!!!! //  basically: (s) -> System.out.println(s), when we create the units, we initialize this for each of them
         this.Name = name;
         this.Health = health;
         this.Attack_points = attack_points;
@@ -20,14 +19,13 @@ public abstract class Unit extends Tile {
 
     ////////////////////   different on tick do()'s in the different unit's classes
 
-    public String describe() {
-        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack_points(), getDefense_points());
+    public String description(){
+        return "\n" + "** " + this.Name + "'s Status ** :        Health: " + this.Health.toString() + "        Attack: " + this.Attack_points + "        Defense: " + this.Defense_points;
     }
 
-    public void initialize_messages(MessageCallback m){   //////  when we create the units, we initialize this for each of them, did this in the builder instead !
+    public void initialize_messages(MessageCallback m){  /////  when we create the units, we initialize this for each of them
         this.messageCallback = m;
     }
-
 
 
 

@@ -1,5 +1,7 @@
 package DD_Package;
 
+import java.util.ArrayList;
+
 public class Warrior extends Player{
 
     protected int ability_cooldown;
@@ -19,16 +21,24 @@ public class Warrior extends Player{
         this.getHealth().setHealth_pool(this.getHealth().getHealth_pool() + (5*this.getPlayer_Level()));
         this.setAttack_points(this.getAttack_points() + (2*this.getPlayer_Level()));
         this.setDefense_points(this.getDefense_points() + this.getPlayer_Level());
-        this.getMessageCallback().send("");  /////////////////  the message !!!
+
+        int hea_add = (15*this.getPlayer_Level()), att_add = (6*this.getPlayer_Level()), def_add = (this.getPlayer_Level()*2);  ///////  now change them accordingly
+        String message = "\n" + this.getName() + " reached level " + this.getPlayer_Level() + ": +" + hea_add + " Health, +" + att_add + " Attack, +" + def_add + " Defense." + "\n";
+        this.getMessageCallback().send(message);  /////////////////  the message with the regular upgrades + the class upgrades !!!
     }
 
+
     @Override
-    public void Ability_Cast() {
+    public void Ability_Cast(Game_Board game_board) {
         if(this.remaining_cooldown > 0){
-            System.out.println("You cannot use the ability yet !!");
+            this.getMessageCallback().send("You cannot use the ability yet !!");
         }else{
             this.remaining_cooldown = this.ability_cooldown;
             this.getHealth().setHealth_amount(Math.min(this.getHealth().getHealth_amount() + (10*this.getDefense_points()), this.getHealth().getHealth_pool()));
+
+            ArrayList<Enemy> enemies_in_3_range = this.get_enemies_in_n_range(3, game_board);
+            double index_attacked = Math.floor(Math.random()*(enemies_in_3_range.size() + 1));  /// the random enemy
+
             ////////// continue casting the ability
         }
 
@@ -45,10 +55,15 @@ public class Warrior extends Player{
 
 
     @Override
-    public void interact(Tile other) {
+    public void interact(Tile other) {   ///////   use attack() and defense() if needed
         other.interact(this);
 
         this.getMessageCallback().send("");  /////////////////  the message !!!   if needed !!
+    }
+
+    @Override
+    public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
+        return super.description() + "        Cooldown: " + this.remaining_cooldown + "/" + this.ability_cooldown + "\n";
     }
 
     @Override

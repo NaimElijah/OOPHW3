@@ -44,7 +44,7 @@ public class InputReader {
         try{
             lines = Files.readAllLines(Paths.get(this.file_path));
         }catch (IOException e){
-            System.out.println("Game over");     //////  can't read "level<i>.txt" because it doesnt exist
+            System.out.println("Game over");     //////  can't read "level<i>.txt" because it doesnt exist, not needed because we get the amount of levels
             System.out.println(e.getMessage() + "\n" + e.getStackTrace());
         }
 
@@ -53,7 +53,7 @@ public class InputReader {
         Monster curr_monster;
         Trap curr_trap;
 
-        for(int i = 0; i < amount_of_lines; i++) {     //////////   if needed we wil give each of the units the game_board, for connection reasons
+        for(int i = 0; i < amount_of_lines; i++) {     //////////   if needed we can give each of the units the game_board, for connection reasons
             ArrayList<Tile> curr_line = new ArrayList<Tile>();
             for(int j=0; j < line_length; j++) {
                 if ('#' == (lines.get(i).charAt(j))) {   //// Wall
@@ -62,75 +62,93 @@ public class InputReader {
                     curr_line.add(new Empty(j, i));
                 }else if ('s' == (lines.get(i).charAt(j))) {   ////////////////////////////////  Monsters now:
                     curr_monster = new Monster(3, "s", j, i, "Lannister Solider", 80, 25, 3, 25);
-//                    curr_monster.initialize_messages(System.out::println);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 } else if ('k' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(4, "k", j, i, "Lannister Knight", 200, 14, 8, 50);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('q' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(5, "q", j, i, "Queen’s Guard", 400, 20, 15, 100);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('z' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(3, "z", j, i, "Wright", 600, 30, 15, 100);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 } else if ('b' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(4, "b", j, i, "Bear-Wright", 1000, 75, 30, 250);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('g' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(5, "g", j, i, "Giant-Wright", 1500, 100, 40, 500);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('w' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(6, "w", j, i, "White Walker", 2000, 150, 50, 1000);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 } else if ('M' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(6, "M", j, i, "The Mountain", 1000, 60, 25, 500);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('C' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(1, "C", j, i, "Queen Cersei", 100, 10, 10, 1000);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('K' == (lines.get(i).charAt(j))) {
                     curr_monster = new Monster(8, "K", j, i, "Night’s King", 5000, 300, 150, 5000);
+                    curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('B' == (lines.get(i).charAt(j))) {   ///////////////////////////////// Traps now:
                     curr_trap = new Trap(1, 5, "B", j, i, "Bonus Trap", 1, 1, 1, 250);
+                    curr_trap.initialize_messages(System.out::println);
                     this.Traps.add(curr_trap);
                     curr_line.add(curr_trap);
                 }else if ('Q' == (lines.get(i).charAt(j))) {
                     curr_trap = new Trap(3, 7, "Q", j, i, "Queen’s Trap", 250, 50, 10, 100);
+                    curr_trap.initialize_messages(System.out::println);
                     this.Traps.add(curr_trap);
                     curr_line.add(curr_trap);
                 }else if ('D' == (lines.get(i).charAt(j))) {
                     curr_trap = new Trap(1, 10, "D", j, i, "Death Trap", 500, 100, 20, 250);
+                    curr_trap.initialize_messages(System.out::println);
                     this.Traps.add(curr_trap);
                     curr_line.add(curr_trap);
                 }else if ('@' == (lines.get(i).charAt(j))) {   ///////////////////////////////   Player now:
                     if (this.player == 1){
                         this.the_player = new Warrior(j, i, "Jon Snow", 300, 30, 4, 3);
+                        this.the_player.initialize_messages(System.out::println);
                         curr_line.add(this.the_player);
                     }else if (this.player == 2){
                         this.the_player = new Warrior(j, i, "The Hound", 400, 20, 6, 5);
+                        this.the_player.initialize_messages(System.out::println);
                         curr_line.add(this.the_player);
                     } else if (this.player == 3){
                         this.the_player = new Mage(j, i, "Melisandre", 100, 5, 1, 300, 30, 15, 5, 6);
+                        this.the_player.initialize_messages(System.out::println);
                         curr_line.add(this.the_player);
                     }else if (this.player == 4){
                         this.the_player = new Mage(j, i, "Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4);
+                        this.the_player.initialize_messages(System.out::println);
                         curr_line.add(this.the_player);
                     }else if (this.player == 5){
                         this.the_player = new Rogue(20, j, i, "Arya Stark", 150, 40, 2);
+                        this.the_player.initialize_messages(System.out::println);
                         curr_line.add(this.the_player);
                     }else if (this.player == 6){
                         this.the_player = new Rogue(50, j, i, "Bronn", 250, 35, 3);
+                        this.the_player.initialize_messages(System.out::println);
                         curr_line.add(this.the_player);
                     }
                 }

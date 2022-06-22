@@ -21,7 +21,7 @@ public class Game_Board {
 //        this.ge ///////   if in Monsters, make it empty(".") and remove it from it's arraylist, if in Traps, make it empty(".") and remove it from it's arraylist.
 //    }
 
-    public void arrange_board(){    /////////    updates the 2d arraylist(the board)
+    public void arrange_board(){      ///////////////    updates the 2d arraylist(the board)
         ArrayList<ArrayList<Tile>> new_arrays_Board = new ArrayList<ArrayList<Tile>>();
         for(int i=0; i< this.arrays_Board.size(); i++){
             ArrayList<Tile> curr_new_line = new ArrayList<Tile>();
