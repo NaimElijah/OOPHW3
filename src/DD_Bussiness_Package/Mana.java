@@ -30,8 +30,10 @@ public class Mana {
     public void setCurrent_mana(int current_mana) {
         if (current_mana > this.mana_pool){
             this.current_mana = this.mana_pool;
-        }else{   /////  won't go below 0 because we won't let it when casting the ability
-            this.current_mana = current_mana;
+        }else if (current_mana < 0){
+            this.current_mana = 0;
+        }else{   /////  anyway it won't go below 0 because we won't let it when casting the ability
+             this.current_mana = current_mana;
         }
     }
 }

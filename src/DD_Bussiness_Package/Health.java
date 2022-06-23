@@ -30,7 +30,9 @@ public class Health {
     public void setHealth_amount(int health_amount){
         if( health_amount > this.Health_pool){
             this.Health_amount = this.Health_pool;
-        }else {   /////  if health_amount is below 0 then the unit will be removed
+        }else if (health_amount < 0){
+            this.Health_amount = 0;
+        } else {
             this.Health_amount = health_amount;
         }
     }

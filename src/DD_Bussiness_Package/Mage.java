@@ -1,5 +1,7 @@
 package DD_Bussiness_Package;
 
+import java.util.ArrayList;
+
 public class Mage extends Player{
     protected Mana mana;
     protected int mana_cost;
@@ -18,7 +20,7 @@ public class Mage extends Player{
 
     public void Level_Up(){
         super.Level_Up();
-        ////////////////////////////  now addons  ////////////////////////////  /////  add print here or somewhere else
+        ////////////////////////////  now addons  ////////////////////////////
         this.mana.setMana_pool(this.mana.getMana_pool() + (25*this.getPlayer_Level()));
         this.mana.setCurrent_mana(Math.min(this.mana.getCurrent_mana() + (this.mana.getMana_pool()/4), this.mana.getMana_pool()));
         this.spell_power = this.spell_power + (10*this.getPlayer_Level());
@@ -31,25 +33,30 @@ public class Mage extends Player{
     @Override
     public void Ability_Cast(Game_Board game_board) {
         if(this.mana.getCurrent_mana() < this.mana_cost){
-            this.getMessageCallback().send("You don't have enough Mana in order to use your ability");
+            this.getMessageCallback().send(this.getName() + " tried to cast Blizzard, but there was not enough mana: "+ this.mana.getCurrent_mana() + "/"+ this.mana_cost + ".");
         }else{
+            this.getMessageCallback().send(this.getName() + " cast Blizzard.");
             this.mana.setCurrent_mana(this.mana.getCurrent_mana() - this.mana_cost);
             int hits = 0;
-//            while(hits < this.hits_count && ){   /////////////////////////////////////////  continue
-//                //////////// continue casting the ability
-//                hits += 1;
-//            }
+            ArrayList<Enemy> surrounding_enemies_in_range = this.get_enemies_in_n_range(this.ability_range, game_board);
+            while(hits < this.hits_count && surrounding_enemies_in_range.size() > 0){   /////////////////////////////////////////  continue
+                int index_attacked = (int)(Math.floor(Math.random() * (surrounding_enemies_in_range.size())));  /// the random enemy
+                this.attack(surrounding_enemies_in_range.get(index_attacked), this.spell_power, game_board, "sp");  /// attacking the random enemy
+                surrounding_enemies_in_range = this.get_enemies_in_n_range(this.ability_range, game_board);   ///  updating
+                hits += 1;  /// counting hits
+            }
         }
     }
 
-    @Override
-    public void On_Tick_Do(Game_Board game) {
+
+    public void On_Tick_Do() {
         this.mana.setCurrent_mana(Math.min(this.mana.getMana_pool(), this.mana.getCurrent_mana() + this.getPlayer_Level()));
     }
 
     @Override
     public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
-        return super.description() + "        Mana: " + this.mana.getCurrent_mana() + "/" + this.mana.getMana_pool() + "        Spell Power: " + this.spell_power + "\n";
+        return super.description() + "        Mana: " + this.mana.getCurrent_mana() + "/" + this.mana.getMana_pool() + "        Spell Power: " + this.spell_power;
     }
+
 
 }

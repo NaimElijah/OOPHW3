@@ -34,7 +34,7 @@ public class Trap extends Enemy{
         }
 
         if(this.getRange(player) < 2){   /////  if it's close to the player, it attacks the player
-            this.attack(player, (int)(Math.floor(Math.random()*(this.getAttack_points() + 1))));
+            this.attack(player, (int)(Math.floor(Math.random()*(this.getAttack_points() + 1))), game_board, "re");
         }
     }
 
@@ -43,5 +43,7 @@ public class Trap extends Enemy{
     public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
         return super.description();  ////////  if we don't need to .send(what we return here) then delete this method here, it's already in Enemy.
     }
+
+
 
 }

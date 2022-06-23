@@ -1,5 +1,7 @@
 package DD_Bussiness_Package;
 
+import java.util.ArrayList;
+
 public abstract class Unit extends Tile {
     protected String Name;
     protected Health Health;
@@ -20,11 +22,27 @@ public abstract class Unit extends Tile {
     ////////////////////   different on tick do()'s in the different unit's classes
 
     public String description(){
-        return "\n" + "** " + this.Name + "'s Status ** :        Health: " + this.Health.toString() + "        Attack: " + this.Attack_points + "        Defense: " + this.Defense_points;
+        return "** " + this.Name + "'s Status ** :        Health: " + this.Health.toString() + "        Attack: " + this.Attack_points + "        Defense: " + this.Defense_points;
     }
 
     public void initialize_messages(MessageCallback m){  /////  when we create the units, we initialize this for each of them
         this.messageCallback = m;
+    }
+
+
+    public ArrayList<Enemy> get_enemies_in_n_range (int range, Game_Board game_board){  //////  maybe give the player the board so we can access the Enemies
+        ArrayList<Enemy> res = new ArrayList<Enemy>();
+        for (Monster m: game_board.getMonsters()){
+            if (m.getRange(game_board.getThe_player()) < range){
+                res.add(m);
+            }
+        }
+        for (Trap t: game_board.getTraps()){
+            if (t.getRange(game_board.getThe_player()) < range){
+                res.add(t);
+            }
+        }
+        return res;
     }
 
 
@@ -59,33 +77,41 @@ public abstract class Unit extends Tile {
 
 
 
-    @Override
-    public void move(Tile tile) {
-        tile.move(this);   //////////////////////////////  and then it goes to move(enemy) or move(player), there it attacks, does nothing...
+    public abstract void on_death(Game_Board game_board, String killer);
+
+
+
+
+
+    public void attack(Unit unit, int attack_amount, Game_Board game, String type){  /////////  later see where to do the .send(messages), not complicated
+        if (type.equals("re")) {
+            this.getMessageCallback().send(this.getName() + " engaged in combat with " + unit.getName()); ///////////   message
+            this.getMessageCallback().send(this.getName() + " rolled " + attack_amount + " attack points."); ///////////   message
+            this.getMessageCallback().send(this.description()); ///////////   attacker description
+            this.getMessageCallback().send(unit.description()); ///////////   defender description
+        }
+        unit.defense(this, attack_amount, game, type);
+
     }
 
 
-
-
-
-    public void attack(Unit unit, int attack_amount){  /////////  later see where to do the .send(messages), not complicated
-        this.getMessageCallback().send(this.getName()+ " engaged in combat with " + unit.getName()); ///////////   message
-        this.getMessageCallback().send(this.description() + "\n" + unit.description()); ///////////   message
-        unit.defense(this, attack_amount);
-        this.getMessageCallback().send(this.getName()+ "rolled" + attack_amount + ); ///////////   message
-    }
-
-
-
-    public void defense(Unit unit, int attack_amount){  /////////  later see where to do the .send(messages), not complicated
+    public void defense(Unit unit, int attack_amount, Game_Board game, String type){  /////////  later see where to do the .send(messages), not complicated
         int defense_amount = (int)(Math.floor(Math.random()*(this.getDefense_points() + 1)));
+        this.getMessageCallback().send(this.getName() + " rolled " + defense_amount + " defense points."); ///////////   message
         int damage = attack_amount - defense_amount;
-        if ( damage > 0){
-            this.getHealth().setHealth_amount(this.getHealth().getHealth_amount() - damage);
-            this.getMessageCallback().send(""); ///////////   message
+        if (damage < 0) {
+            damage = 0;
+        }
+        if (type.equals("re")) {
+            this.getMessageCallback().send(unit.getName() + " dealt " + damage + " damage to " + this.getName() + "."); ///////////   message
+        }else {
+            this.getMessageCallback().send(unit.getName() + " hit " + this.getName() + " for "+ damage + " ability damage.");
+        }
+        this.getHealth().setHealth_amount(this.getHealth().getHealth_amount() - damage);
+        if (this.getHealth().getHealth_amount() <= 0){
+            this.on_death(game, unit.getName());
         }
 
-        //////// subtract and use .send(messages)
     }
 
 

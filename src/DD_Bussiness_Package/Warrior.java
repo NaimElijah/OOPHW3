@@ -33,22 +33,22 @@ public class Warrior extends Player{
     @Override
     public void Ability_Cast(Game_Board game_board) {
         if(this.remaining_cooldown > 0){
-            this.getMessageCallback().send("You cannot use the ability yet !!");
+            this.getMessageCallback().send(this.getName() + " tried to cast Avenger's Shield, but there is a cooldown: " + this.remaining_cooldown + ".");
         }else{
-            this.remaining_cooldown = this.ability_cooldown;
+            this.remaining_cooldown = this.ability_cooldown + 1;
             this.getHealth().setHealth_amount(Math.min(this.getHealth().getHealth_amount() + (10*this.getDefense_points()), this.getHealth().getHealth_pool()));
+            this.getMessageCallback().send(this.getName() + " used Avenger's Shield, healing for " + (10*this.getDefense_points()));
 
             ArrayList<Enemy> enemies_in_3_range = this.get_enemies_in_n_range(3, game_board);
-            double index_attacked = Math.floor(Math.random()*(enemies_in_3_range.size() + 1));  /// the random enemy
-
-            ////////////////////////////////////////// continue casting the ability
+            if (enemies_in_3_range.size() > 0) {
+                int index_attacked = (int)(Math.floor(Math.random() * (enemies_in_3_range.size())));  /// the random enemy
+                this.attack(enemies_in_3_range.get(index_attacked), this.getHealth().getHealth_pool() / 10, game_board, "sp");  /// attacking the random enemy
+            }
         }
-
-        this.getMessageCallback().send("");  ////////////////////////////////////////////////////////  the message !!!
     }
 
-    @Override
-    public void On_Tick_Do(Game_Board game) {
+
+    public void On_Tick_Do() {
         if(this.remaining_cooldown > 0){
             this.remaining_cooldown = this.remaining_cooldown - 1;
         }
@@ -57,7 +57,7 @@ public class Warrior extends Player{
 
     @Override
     public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
-        return super.description() + "        Cooldown: " + this.remaining_cooldown + "/" + this.ability_cooldown + "\n";
+        return super.description() + "        Cooldown: " + this.remaining_cooldown + "/" + this.ability_cooldown;
     }
 
 

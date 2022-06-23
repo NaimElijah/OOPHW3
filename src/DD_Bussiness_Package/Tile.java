@@ -32,9 +32,11 @@ public abstract class Tile {
         return Math.sqrt(Math.pow(this.coordinate.getX_coor() - other.getCoordinate().getX_coor(), 2) + Math.pow(this.coordinate.getY_coor() - other.getCoordinate().getY_coor(), 2));
     }
 
-    public abstract void move(Tile tile);
-    public abstract void move(Enemy enemy);  //////  in case we encounter an Enemy
-    public abstract void move(Player player);  //////  in case we encounter a Player
+    public abstract void move(Tile tile, Game_Board game);
+
+    public abstract void move(Enemy enemy, Game_Board game);
+
+    public abstract void move(Player player, Game_Board game);
 
     public void replace_positions(Tile other){
         Coordinate temp = this.getCoordinate();

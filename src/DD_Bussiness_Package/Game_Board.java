@@ -20,12 +20,14 @@ public class Game_Board {
     }
 
     public void remove(Enemy enemy){
-        enemy.replace_positions(this.getThe_player());
         this.getArrays_Board().get(enemy.getCoordinate().getY_coor()).set(enemy.getCoordinate().getX_coor(), new Empty(enemy.getCoordinate().getX_coor(), enemy.getCoordinate().getY_coor()));
+        this.getThe_player().replace_positions(enemy);      ////////  check why it makes the player Empty(".") as well.
         if (this.getMonsters().contains(enemy)){
-            this.getMonsters().remove(enemy);
+            this.getMonsters().remove(this.getMonsters().indexOf(enemy));
+//            this.getMonsters().remove(enemy);
         }else {
-            this.getTraps().remove(enemy);
+//            this.getTraps().remove(enemy);
+            this.getTraps().remove(this.getTraps().indexOf(enemy));
         }
     ///////   if in Monsters, make it empty(".") and remove it from it's arraylist, if in Traps, make it empty(".") and remove it from it's arraylist.
     }
@@ -36,25 +38,16 @@ public class Game_Board {
 
 
     public void game_tick (){       /////////  does the on_tick_do's of all the units in this Game_Board
-        if (this.getThe_player().getHealth().getHealth_amount() <= 0){
-            this.getThe_player().on_death(this);
-        }else {
-            this.getThe_player().On_Tick_Do(this);
-        }
-        for(Monster monster:this.getMonsters()){
-            if(monster.getHealth().getHealth_amount() <= 0){
-                monster.on_death(this);
-                continue;
-            }
+        this.getThe_player().On_Tick_Do();
+
+        for (Monster monster:this.getMonsters()) {
             monster.On_Tick_Do(this.getThe_player(), this);
         }
-        for (Trap trap: this.getTraps()){
-            if(trap.getHealth().getHealth_amount() <= 0){
-                trap.on_death(this);
-                continue;
-            }
+
+        for (Trap trap:this.getTraps()) {
             trap.On_Tick_Do(this.getThe_player(), this);
         }
+
     }
 
 

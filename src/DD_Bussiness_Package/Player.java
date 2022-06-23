@@ -2,7 +2,7 @@ package DD_Bussiness_Package;
 
 import java.util.ArrayList;
 
-public abstract class Player extends Unit{
+public abstract class Player extends Unit implements HeroicUnit{
     protected int Experience;
     protected int Player_Level;
 
@@ -13,7 +13,7 @@ public abstract class Player extends Unit{
     }
 
     public String description(){
-        return  super.description() + "        Level: " + this.Player_Level + "\n" + "        Experience: " + this.Experience + "/" + (50*this.Player_Level);
+        return super.description() + "        Level: " + this.Player_Level + "\n" + "        Experience: " + this.Experience + "/" + (50*this.Player_Level);
     }
 
 
@@ -29,23 +29,6 @@ public abstract class Player extends Unit{
         this.setDefense_points(this.getDefense_points() + this.Player_Level);
     }
 
-    public abstract void Ability_Cast(Game_Board game_board);
-
-
-    public ArrayList<Enemy> get_enemies_in_n_range (int range, Game_Board game_board){  //////  maybe give the player the board so we can access the Enemies
-        ArrayList<Enemy> res = new ArrayList<Enemy>();
-        for (Monster m: game_board.getMonsters()){
-            if (m.getRange(game_board.getThe_player()) < range){
-                res.add(m);
-            }
-        }
-        for (Trap t: game_board.getTraps()){
-            if (t.getRange(game_board.getThe_player()) < range){
-                res.add(t);
-            }
-        }
-        return res;
-    }
 
     public void Experience_Addition(int Addition){   ////////  only needed in this class, might need to be in every player class, think it's ok here
         this.Experience = this.Experience + Addition;
@@ -55,22 +38,36 @@ public abstract class Player extends Unit{
     }
 
 
-    public abstract void On_Tick_Do(Game_Board game);
+    public abstract void On_Tick_Do();
 
-    public void on_death(Game_Board game_board){   ////////////////  continue
-        //////   make it "X" and print with .send(game_board), game over is sent in the CLI, if not do .send("Game Over") here
+//    public void On_Tick_Do(Game_Board game){
+//        this.getMessageCallback().send(this.description());
+//    }
+
+
+    public void on_death(Game_Board game_board, String killer){
+        this.getMessageCallback().send(this.getName() + " was killed by " + killer + ".");
+        this.getMessageCallback().send("You lost.");
         game_board.remove_player();
     }
 
+
+
+
     @Override
-    public void move(Enemy enemy) {  ////////////  confrontation        /////   never reached  !!!!!!!!!!!!!!!!!!!!!!!!!!
-//        enemy.attack(this, (int)(Math.floor(Math.random()*(enemy.getAttack_points() + 1))));   /////   never reached  !!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void move(Tile tile, Game_Board game) {
+        tile.move(this, game);
     }
 
     @Override
-    public void move(Player player) { } ///////////////  won't reach another player in this game version but in the future we want to make another player so this will be useful !!
-    ////////  then don't let it move to here, do nothing
+    public void move(Player player, Game_Board game) {   /////////  a player runs into a player, possible only in multiplayer, not needed in single player.
+        //////  do nothing or heal if the class is healer(make this class)
+    }
 
+    @Override
+    public void move(Enemy enemy, Game_Board game) {       //  only when a monster is moving to a player(attacks), in this case not needed
+        // the monster attack() the player    // because it already attacks when close to player in its on_tick_do(), so this method is never reached.
+    }
 
 
 

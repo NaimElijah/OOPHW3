@@ -1,25 +1,22 @@
 package DD_Bussiness_Package;
 
-public class Monster extends Enemy{
-    protected int vision_range;
+public class Boss extends Monster implements HeroicUnit{
+    protected int ability_frequency;
+    protected int combat_ticks;
 
-    public Monster(int vision_range, String character, int x, int y, String name, int h_p, int attack_points, int defense_points, int experience_value) {
-        super(character, new Coordinate(x, y), name, new Health(h_p, h_p), attack_points, defense_points, experience_value);
-        this.vision_range = vision_range;
+    public Boss(int vision_range, String character, int x, int y, String name, int h_p, int attack_points, int defense_points, int experience_value, int ability_frequency) {
+        super(vision_range, character, x, y, name, h_p, attack_points, defense_points, experience_value);
+        this.ability_frequency = ability_frequency;
+        this.combat_ticks = 0;
     }
-
-    public int getVision_range() {
-        return this.vision_range;
-    }
-    public void setVision_range(int vision_range) {
-        this.vision_range = vision_range;
-    }
-
 
     @Override
     public void On_Tick_Do(Player player, Game_Board game_board) {
         if(this.getRange(player) < this.vision_range){
-            if(this.getRange(player) <= 1){   /////  next to each other
+            this.combat_ticks = this.combat_ticks + 1;
+            if (this.combat_ticks == this.ability_frequency){
+                this.Ability_Cast(game_board);
+            } else if(this.getRange(player) <= 1){   /////  next to each other
                 this.attack(player, (int)(Math.floor(Math.random()*(this.getAttack_points() + 1))), game_board, "re");
             }else {    //////  chasing after the player
                 int dx = this.getCoordinate().getX_coor() - player.getCoordinate().getX_coor();
@@ -53,13 +50,10 @@ public class Monster extends Enemy{
         }
     }
 
-
-
     @Override
-    public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
-        return super.description() + "        Vision Range: " + this.vision_range + "\n";
+    public void Ability_Cast(Game_Board game_board) {
+        this.combat_ticks = 0;
+        this.getMessageCallback().send(this.getName() + " shoots " + game_board.getThe_player().getName() + " for " + this.getAttack_points() + " damage.");
+        this.attack(game_board.getThe_player(), this.getAttack_points(), game_board, "sp");
     }
-
-
-
 }

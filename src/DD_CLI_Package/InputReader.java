@@ -42,7 +42,7 @@ public class InputReader {
         try{
             lines = Files.readAllLines(Paths.get(this.file_path));
         }catch (IOException e){
-            System.out.println("Game over");     //////  can't read "level<i>.txt" because it doesnt exist, not needed because we get the amount of levels
+// we're using a for on the exact amount so no need for this:    System.out.println("Game over"); //////  can't read "level<i>.txt" because it doesnt exist, not needed because we get the amount of levels
             System.out.println(e.getMessage() + "\n" + e.getStackTrace());
         }
 
@@ -94,17 +94,17 @@ public class InputReader {
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 } else if ('M' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster(6, "M", j, i, "The Mountain", 1000, 60, 25, 500);
+                    curr_monster = new Boss(6, "M", j, i, "The Mountain", 1000, 60, 25, 500, 5);
                     curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('C' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster(1, "C", j, i, "Queen Cersei", 100, 10, 10, 1000);
+                    curr_monster = new Boss(1, "C", j, i, "Queen Cersei", 100, 10, 10, 1000, 8);
                     curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('K' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster(8, "K", j, i, "Night’s King", 5000, 300, 150, 5000);
+                    curr_monster = new Boss(8, "K", j, i, "Night’s King", 5000, 300, 150, 5000, 3);
                     curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
@@ -146,6 +146,11 @@ public class InputReader {
                         curr_line.add(this.the_player);
                     }else if (this.player == 6){
                         this.the_player = new Rogue(50, j, i, "Bronn", 250, 35, 3);
+                        this.the_player.initialize_messages(System.out::println);
+                        curr_line.add(this.the_player);
+                    }
+                    else if (this.player == 7){
+                        this.the_player = new Hunter(j, i, "Ygritte", 220, 30, 2, 6);
                         this.the_player.initialize_messages(System.out::println);
                         curr_line.add(this.the_player);
                     }

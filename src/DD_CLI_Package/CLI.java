@@ -7,12 +7,13 @@ import java.io.File;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class CLI {
+public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Timestamp, sprites, new classes, bosses can use different special abilities, etc.  ******
     public static void main(String[] args) {  /////  all the sout's and visuals are here
         boolean is_game_again = true;
         while (is_game_again){
             Scanner reader = new Scanner(System.in);  // this will read the user's input
 
+            System.out.println();
             System.out.println("**********************          Welcome to Dungeons_and_Dragons Remastered  !!          **********************");
             System.out.println();
             System.out.println("We are 'Legion', a group of fierce warriors, mages and rogues from all over the continent.");
@@ -27,10 +28,10 @@ public class CLI {
             System.out.println("We all wish you the best of luck,");
             System.out.println("The last stand for humanity's sake has just started...");
             System.out.println("Just remember,");
-            System.out.println("Whatever it takes...");   /////////  a line from Avengers Endgame.
+            System.out.println("Whatever it takes...");   /////////  a line from "Avengers Endgame".
             System.out.println();
             System.out.println();
-            System.out.println("Select a player:"); /// the player selection screen
+            System.out.println("Select a player for your journey:"); /// the player selection screen
             System.out.println();
             System.out.println("Warriors:");
             System.out.println(".1. Jon Snow          Health: 300/300          Attack: 30          Defense: 4          Level: 1");  /// stats
@@ -52,9 +53,17 @@ public class CLI {
             System.out.println();
             System.out.println(".6. Bronn          Health: 250/250          Attack: 35          Defense: 3          Level: 1");  /// stats
             System.out.println("          Experience: 0/50          Energy: 100/100");
-
+            System.out.println();
+            System.out.println(".7. Ygritte          Health: 220/220          Attack: 30          Defense: 2          Level: 1");  /// stats
+            System.out.println("          Experience: 0/50          Arrows: 10          Range: 6");
+            System.out.println();
             //  first the representation of all the players, ordered by their types, is shown and the player picks a player, receive that in player
-            int player = reader.nextInt();
+
+            int player = 8;
+            while (player > 7 || player < 1) {
+                System.out.println("Select a player: (enter 1/2/3/4/5/6/7)"); /// the player selection screen
+                player = reader.nextInt();
+            }
             System.out.println("You have selected:");    ///////  player selection
             if (player == 1){ System.out.println("Jon Snow");}
             else if(player == 2){System.out.println("The Hound");}
@@ -62,6 +71,7 @@ public class CLI {
             else if(player == 4){System.out.println("Thoros of Myr");}
             else if(player == 5){System.out.println("Arya Stark");}
             else if(player == 6){System.out.println("Bronn");}
+            else {System.out.println("Ygritte");}
 
 
 
@@ -72,36 +82,35 @@ public class CLI {
 //            System.out.println("****  level txt's found in levels directory: "+ fileCount);
 
 
+            boolean is_enemies = true, is_alive = true;
             for (int line = 1; line <= fileCount; line++) {  ////////////////////////////////////////////////////   change in levels
                 Game_Board game = new Game_Board("D:\\levels_dir\\levels_dir\\level" + line +".txt", player);   ////////  gets the file_path and the player and builds
 //                Game_Board game = new Game_Board(args[0] + "\\level" + level +".txt", player);   ////////  gets the file_path and the player and builds
 
                 String move = "";
-                boolean is_enemies = true, is_alive = true;
+                reader.nextLine();
 
                 while (is_enemies && is_alive) {   //////////////////////////////////////////////////////   change in game tick
                     System.out.println(game);     //////  showing the game board
+                    System.out.println(game.getThe_player().description());  /////  showing the player's current status
                     System.out.println("Enter your move:");
+
                     move = reader.nextLine();
+                    System.out.println("");
 
                     int curr_playerX = game.getThe_player().getCoordinate().getX_coor();
                     int curr_playerY = game.getThe_player().getCoordinate().getY_coor();
 
                     if(move.equals("w")){    //////  up !!                     ///////  can easily make it 2 or more players
-                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY-1).get(curr_playerX));
-
+                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY-1).get(curr_playerX), game);
                     } else if (move.equals("s")) {    ////// down !!
-                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY+1).get(curr_playerX));
-
+                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY+1).get(curr_playerX), game);
                     }else if (move.equals("a")) {    ////// left !!
-                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY).get(curr_playerX-1));
-
+                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY).get(curr_playerX-1), game);
                     }else if (move.equals("d")) {    ////// right !!
-                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY).get(curr_playerX+1));
-
+                        game.getThe_player().move(game.getArrays_Board().get(curr_playerY).get(curr_playerX+1), game);
                     }else if (move.equals("e")) {    ////// special ability !!
                         game.getThe_player().Ability_Cast(game);
-
                     }else if (move.equals("q")) { }  ////// do nothing !!  might delete this if because it will do nothing and print again anyway
 
                     //////  now do the on_tick_do's of all the units in the Game_Board game
@@ -115,17 +124,21 @@ public class CLI {
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
                 if (!is_alive){
-                    System.out.println(game);     //////  showing the game board
+                    System.out.println(game);     //////  showing the game board with the player's description one last time
+                    System.out.println(game.getThe_player().description());
                     break;
                 }
             }
 
-            System.out.println("Game over");
+            if (!is_alive) {
+                System.out.println("****************************************        Game over        ****************************************");
+            }else {
+                System.out.println("****************************************        You Won !!        ****************************************");
+            }
 
             System.out.println("Do you want to play again ?  (enter 'yes' to play again, enter anything else to quit)");
             String yes_or_no = reader.nextLine();
-            is_game_again = yes_or_no == "yes";
+            is_game_again = yes_or_no.equals("yes");
         }
-
     }
 }

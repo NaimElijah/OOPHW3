@@ -1,5 +1,7 @@
 package DD_Bussiness_Package;
 
+import java.util.ArrayList;
+
 public class Rogue extends Player{
 
     protected int cost;
@@ -25,23 +27,28 @@ public class Rogue extends Player{
     @Override
     public void Ability_Cast(Game_Board game_board) {
         if(this.current_energy < this.cost){
-            this.getMessageCallback().send("You don't have enough Energy in order to use your ability");
+            this.getMessageCallback().send(this.getName() + " tried to cast Fan of Knives, but there was not enough energy: " + this.current_energy + "/" + this.cost + ".");
         }else{
+            this.getMessageCallback().send(this.getName() + " cast Fan of Knives.");
             this.current_energy = this.current_energy - this.cost;
-            ////////////////////////////////////////////////////////////// continue casting the ability
+            ArrayList<Enemy> surrounding_enemies_in_range_2 = this.get_enemies_in_n_range(2, game_board);
+            if(surrounding_enemies_in_range_2.size() > 0){
+                for (Enemy enemy: surrounding_enemies_in_range_2){
+                    this.attack(enemy, this.getAttack_points(), game_board, "sp");
+                }
+            }
         }
     }
 
-    @Override
-    public void On_Tick_Do(Game_Board game) {
+
+    public void On_Tick_Do() {
         this.current_energy = Math.min(this.current_energy + 10, 100);
     }
 
     @Override
     public String description() {      /////////   returns full information of the current unit, maybe just .send(what we return here), maybe...
-        String res = "\n" + "** " + this.getName() + "'s Status ** :        Health: " + this.getHealth().toString() + "        Attack: " + this.getAttack_points() + "        Defense: " + this.getDefense_points() + "        Level: " + this.getPlayer_Level() + "\n";
-        res += "        Experience: " + this.getExperience() + "/" + (50*this.getPlayer_Level()) + "        Energy: " + this.current_energy + "/100" + "\n";
-        return res;
+        return super.description() + "        Energy: " + this.current_energy + "/100";
     }
+
 
 }
