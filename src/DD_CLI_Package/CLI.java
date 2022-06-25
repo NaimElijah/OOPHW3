@@ -1,7 +1,5 @@
 package DD_CLI_Package;
-import DD_Bussiness_Package.Game_Board;
-import DD_Bussiness_Package.Monster;
-import DD_Bussiness_Package.Trap;
+import DD_Bussiness_Package.*;
 
 import java.io.File;
 import java.util.Objects;
@@ -14,7 +12,7 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
             Scanner reader = new Scanner(System.in);  // this will read the user's input
 
             System.out.println();
-            System.out.println("**********************          Welcome to Dungeons_and_Dragons Remastered  !!          **********************");
+            System.out.println("          **********************          Welcome to Dungeons_and_Dragons Remastered  !!          **********************");
             System.out.println();
             System.out.println("We are 'Legion', a group of fierce warriors, mages and rogues from all over the continent.");
             System.out.println("as the oldest member of this group, I, Yohan glusunbourough, will give you a quick start on what our goal is.");
@@ -54,6 +52,7 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
             System.out.println(".6. Bronn          Health: 250/250          Attack: 35          Defense: 3          Level: 1");  /// stats
             System.out.println("          Experience: 0/50          Energy: 100/100");
             System.out.println();
+            System.out.println("Hunters:");
             System.out.println(".7. Ygritte          Health: 220/220          Attack: 30          Defense: 2          Level: 1");  /// stats
             System.out.println("          Experience: 0/50          Arrows: 10          Range: 6");
             System.out.println();
@@ -82,14 +81,19 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
 
 
             boolean is_enemies = true, is_alive = true;
+            Player theplayer = new Warrior(1, 1, "temp", 1, 1, 1, 1);  ////  initializing randomly, won't matter because inside it is set as we wish
             reader.nextLine();
 
-            for (int line = 1; line <= fileCount; line++) {  ////////////////////////////////////////////////////   change in levels
+            for (int line = 1; line <= fileCount; line++) {   ////////////////////////////////////////////////////   change in levels
                 Game_Board game = new Game_Board("D:\\levels_dir\\levels_dir\\level" + line +".txt", player);   ////////  gets the file_path and the player and builds
 //                Game_Board game = new Game_Board(args[0] + "\\level" + level +".txt", player);   ////////  gets the file_path and the player and builds
 
+                if ( line > 1 ){
+                    theplayer.setCoordinate(game.getThe_player().getCoordinate());    ///  to the starting position in the new level.
+                    game.setThe_player(theplayer);    ///  setting the player to the player from the prev stage
+                }
+
                 String move = "";
-//                reader.nextLine();
 
                 while (is_enemies && is_alive) {   //////////////////////////////////////////////////////   change in game tick
                     System.out.println(game);     //////  showing the game board
@@ -134,15 +138,25 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
                     break;
                 }
                 is_enemies = true;
-                System.out.println("*******************        You've reached Level " + (line+1) + ", keep going lad you've got this !!!        *******************");
+                if (line < fileCount) {
+                    System.out.println();
+                    System.out.println("          *******************        You've reached Stage " + (line + 1) + ", keep going lad you've got this !!!        *******************");
+                    System.out.println();
+                }
+                theplayer = game.getThe_player();  ////  saving the player for the next level
             }
 
             if (!is_alive) {
-                System.out.println("****************************************        Game over        ****************************************");
+                System.out.println();
+                System.out.println("          ****************************************        Game over        ****************************************");
+                System.out.println();
             }else {
-                System.out.println("****************************************        You Won !!        ****************************************");
+                System.out.println();
+                System.out.println("          ****************************************        You Won !!        ****************************************");
+                System.out.println();
             }
 
+            System.out.println();
             System.out.println("Do you want to play again ?  (enter 'yes' to play again, enter anything else to quit)");
             String yes_or_no = reader.nextLine();
             is_game_again = yes_or_no.equals("yes");

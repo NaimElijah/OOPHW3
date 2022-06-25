@@ -19,6 +19,11 @@ public class Game_Board {
         this.Traps = this.reader.getTraps();
     }
 
+    public void setThe_player(Player the_player) {
+        this.getArrays_Board().get(this.getThe_player().getCoordinate().getY_coor()).set(this.getThe_player().getCoordinate().getX_coor(), the_player);
+        this.the_player = the_player;
+    }
+
     public void remove(Enemy enemy){
         if (this.getThe_player().getRange(enemy) <= 1) {    //////  if it's next to it, then replace positions,  check
             this.getThe_player().replace_positions(enemy);
