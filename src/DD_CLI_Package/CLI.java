@@ -79,24 +79,27 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
             File directory = new File("D:\\\\levels_dir\\\\levels_dir"); ///////// counting how many levels are there in the levels directory
 //            File directory = new File(args[0]);      /////////   counting how many levels are there in the levels directory
             int fileCount= Objects.requireNonNull(directory.list()).length;
-//            System.out.println("****  level txt's found in levels directory: "+ fileCount);
 
 
             boolean is_enemies = true, is_alive = true;
+            reader.nextLine();
+
             for (int line = 1; line <= fileCount; line++) {  ////////////////////////////////////////////////////   change in levels
                 Game_Board game = new Game_Board("D:\\levels_dir\\levels_dir\\level" + line +".txt", player);   ////////  gets the file_path and the player and builds
 //                Game_Board game = new Game_Board(args[0] + "\\level" + level +".txt", player);   ////////  gets the file_path and the player and builds
 
                 String move = "";
-                reader.nextLine();
+//                reader.nextLine();
 
                 while (is_enemies && is_alive) {   //////////////////////////////////////////////////////   change in game tick
                     System.out.println(game);     //////  showing the game board
                     System.out.println(game.getThe_player().description());  /////  showing the player's current status
-                    System.out.println("Enter your move:");
 
-                    move = reader.nextLine();
-                    System.out.println("");
+                    while (!move.equals("w") && !move.equals("a") && !move.equals("d") && !move.equals("s") && !move.equals("e") && !move.equals("q")) {
+                        System.out.println("Enter your move:");
+                        move = reader.nextLine();
+                    }
+                    System.out.println();
 
                     int curr_playerX = game.getThe_player().getCoordinate().getX_coor();
                     int curr_playerY = game.getThe_player().getCoordinate().getY_coor();
@@ -111,7 +114,8 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
                         game.getThe_player().move(game.getArrays_Board().get(curr_playerY).get(curr_playerX+1), game);
                     }else if (move.equals("e")) {    ////// special ability !!
                         game.getThe_player().Ability_Cast(game);
-                    }else if (move.equals("q")) { }  ////// do nothing !!  might delete this if because it will do nothing and print again anyway
+                    }
+//                    else if (move.equals("q")) { }  ////// do nothing !! can delete this because it will do nothing
 
                     //////  now do the on_tick_do's of all the units in the Game_Board game
                     game.game_tick();
@@ -122,12 +126,15 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
                     is_enemies = game.getMonsters().size() > 0 || game.getTraps().size() > 0;
                     is_alive = game.getThe_player().getHealth().getHealth_amount() > 0;
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    move = "";
                 }
                 if (!is_alive){
                     System.out.println(game);     //////  showing the game board with the player's description one last time
                     System.out.println(game.getThe_player().description());
                     break;
                 }
+                is_enemies = true;
+                System.out.println("*******************        You've reached Level " + (line+1) + ", keep going lad you've got this !!!        *******************");
             }
 
             if (!is_alive) {

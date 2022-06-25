@@ -31,7 +31,7 @@ public abstract class Unit extends Tile {
 
 
     public ArrayList<Enemy> get_enemies_in_n_range (int range, Game_Board game_board){  //////  maybe give the player the board so we can access the Enemies
-        ArrayList<Enemy> res = new ArrayList<Enemy>();
+        ArrayList<Enemy> res = new ArrayList<Enemy>();   //////  maybe make a <= version for Boss  !!!!!!!!!!!!!!!
         for (Monster m: game_board.getMonsters()){
             if (m.getRange(game_board.getThe_player()) < range){
                 res.add(m);
@@ -86,9 +86,9 @@ public abstract class Unit extends Tile {
     public void attack(Unit unit, int attack_amount, Game_Board game, String type){  /////////  later see where to do the .send(messages), not complicated
         if (type.equals("re")) {
             this.getMessageCallback().send(this.getName() + " engaged in combat with " + unit.getName()); ///////////   message
-            this.getMessageCallback().send(this.getName() + " rolled " + attack_amount + " attack points."); ///////////   message
             this.getMessageCallback().send(this.description()); ///////////   attacker description
             this.getMessageCallback().send(unit.description()); ///////////   defender description
+            this.getMessageCallback().send(this.getName() + " rolled " + attack_amount + " attack points."); ///////////   message
         }
         unit.defense(this, attack_amount, game, type);
 

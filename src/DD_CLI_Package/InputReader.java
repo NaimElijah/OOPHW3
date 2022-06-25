@@ -69,7 +69,7 @@ public class InputReader {
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('q' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Monster(5, "q", j, i, "Queen’s Guard", 400, 20, 15, 100);
+                    curr_monster = new Monster(5, "q", j, i, "Queen's Guard", 400, 20, 15, 100);
                     curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
@@ -104,7 +104,7 @@ public class InputReader {
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
                 }else if ('K' == (lines.get(i).charAt(j))) {
-                    curr_monster = new Boss(8, "K", j, i, "Night’s King", 5000, 300, 150, 5000, 3);
+                    curr_monster = new Boss(8, "K", j, i, "Night's King", 5000, 300, 150, 5000, 3);
                     curr_monster.initialize_messages(System.out::println);
                     this.Monsters.add(curr_monster);
                     curr_line.add(curr_monster);
@@ -114,7 +114,7 @@ public class InputReader {
                     this.Traps.add(curr_trap);
                     curr_line.add(curr_trap);
                 }else if ('Q' == (lines.get(i).charAt(j))) {
-                    curr_trap = new Trap(3, 7, "Q", j, i, "Queen’s Trap", 250, 50, 10, 100);
+                    curr_trap = new Trap(3, 7, "Q", j, i, "Queen's Trap", 250, 50, 10, 100);
                     curr_trap.initialize_messages(System.out::println);
                     this.Traps.add(curr_trap);
                     curr_line.add(curr_trap);

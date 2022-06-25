@@ -40,10 +40,6 @@ public abstract class Player extends Unit implements HeroicUnit{
 
     public abstract void On_Tick_Do();
 
-//    public void On_Tick_Do(Game_Board game){
-//        this.getMessageCallback().send(this.description());
-//    }
-
 
     public void on_death(Game_Board game_board, String killer){
         this.getMessageCallback().send(this.getName() + " was killed by " + killer + ".");

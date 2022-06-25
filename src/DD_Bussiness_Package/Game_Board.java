@@ -20,16 +20,19 @@ public class Game_Board {
     }
 
     public void remove(Enemy enemy){
-        this.getArrays_Board().get(enemy.getCoordinate().getY_coor()).set(enemy.getCoordinate().getX_coor(), new Empty(enemy.getCoordinate().getX_coor(), enemy.getCoordinate().getY_coor()));
-        this.getThe_player().replace_positions(enemy);      ////////  check why it makes the player Empty(".") as well.
-        if (this.getMonsters().contains(enemy)){
-            this.getMonsters().remove(this.getMonsters().indexOf(enemy));
-//            this.getMonsters().remove(enemy);
+        if (this.getThe_player().getRange(enemy) <= 1) {    //////  if it's next to it, then replace positions,  check
+            this.getThe_player().replace_positions(enemy);
+            this.getArrays_Board().get(this.getThe_player().getCoordinate().getY_coor()).set(this.getThe_player().getCoordinate().getX_coor(), new Empty(enemy.getCoordinate().getX_coor(), enemy.getCoordinate().getY_coor()));
         }else {
-//            this.getTraps().remove(enemy);
+            this.getArrays_Board().get(enemy.getCoordinate().getY_coor()).set(enemy.getCoordinate().getX_coor(), new Empty(enemy.getCoordinate().getX_coor(), enemy.getCoordinate().getY_coor()));
+        }
+
+
+        if (this.getMonsters().contains(enemy)){                     ////////  check why it doesnt put the player in the dead enemy's position
+            this.getMonsters().remove(this.getMonsters().indexOf(enemy));
+        }else {
             this.getTraps().remove(this.getTraps().indexOf(enemy));
         }
-    ///////   if in Monsters, make it empty(".") and remove it from it's arraylist, if in Traps, make it empty(".") and remove it from it's arraylist.
     }
 
     public void remove_player(){   ///////  continue
