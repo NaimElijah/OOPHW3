@@ -75,8 +75,8 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
 
 
 
-            File directory = new File("D:\\\\levels_dir\\\\levels_dir"); ///////// counting how many levels are there in the levels directory
-//            File directory = new File(args[0]);      /////////   counting how many levels are there in the levels directory
+//            File directory = new File("D:\\\\levels_dir\\\\levels_dir");  ///////// counting how many levels are there in the levels directory
+            File directory = new File(args[0]);      /////////   counting how many levels are there in the levels directory
             int fileCount= Objects.requireNonNull(directory.list()).length;
 
 
@@ -85,8 +85,8 @@ public class CLI { // ******  To Do: make it 2 players, KeyListener, System.Time
             reader.nextLine();
 
             for (int line = 1; line <= fileCount; line++) {   ////////////////////////////////////////////////////   change in levels
-                Game_Board game = new Game_Board("D:\\levels_dir\\levels_dir\\level" + line +".txt", player);   ////////  gets the file_path and the player and builds
-//                Game_Board game = new Game_Board(args[0] + "\\level" + level +".txt", player);   ////////  gets the file_path and the player and builds
+//                Game_Board game = new Game_Board("D:\\levels_dir\\levels_dir\\level" + line +".txt", player);   ////////  gets the file_path and the player and builds
+                Game_Board game = new Game_Board(args[0] + "\\level" + line +".txt", player);   ////////  gets the file_path and the player and builds
 
                 if ( line > 1 ){
                     theplayer.setCoordinate(game.getThe_player().getCoordinate());    ///  to the starting position in the new level.

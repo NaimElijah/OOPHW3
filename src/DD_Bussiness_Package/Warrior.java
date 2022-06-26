@@ -39,7 +39,7 @@ public class Warrior extends Player{
             this.getHealth().setHealth_amount(Math.min(this.getHealth().getHealth_amount() + (10*this.getDefense_points()), this.getHealth().getHealth_pool()));
             this.getMessageCallback().send(this.getName() + " used Avenger's Shield, healing for " + (10*this.getDefense_points()));
 
-            ArrayList<Enemy> enemies_in_3_range = this.get_enemies_in_n_range(3, game_board);
+            ArrayList<Enemy> enemies_in_3_range = this.get_enemies_in_n_range(3, game_board, "re");
             if (enemies_in_3_range.size() > 0) {
                 int index_attacked = (int)(Math.floor(Math.random() * (enemies_in_3_range.size())));  /// the random enemy
                 this.attack(enemies_in_3_range.get(index_attacked), this.getHealth().getHealth_pool() / 10, game_board, "sp");  /// attacking the random enemy

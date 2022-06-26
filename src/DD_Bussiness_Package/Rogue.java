@@ -31,7 +31,7 @@ public class Rogue extends Player{
         }else{
             this.getMessageCallback().send(this.getName() + " cast Fan of Knives.");
             this.current_energy = this.current_energy - this.cost;
-            ArrayList<Enemy> surrounding_enemies_in_range_2 = this.get_enemies_in_n_range(2, game_board);
+            ArrayList<Enemy> surrounding_enemies_in_range_2 = this.get_enemies_in_n_range(2, game_board, "re");
             if(surrounding_enemies_in_range_2.size() > 0){
                 for (Enemy enemy: surrounding_enemies_in_range_2){
                     this.attack(enemy, this.getAttack_points(), game_board, "sp");

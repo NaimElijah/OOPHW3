@@ -31,7 +31,7 @@ public class Hunter extends Player{
 
     @Override
     public void Ability_Cast(Game_Board game_board) {
-        ArrayList<Enemy> in_range_enemies = this.get_enemies_in_n_range(this.range, game_board);
+        ArrayList<Enemy> in_range_enemies = this.get_enemies_in_n_range(this.range, game_board, "sp");
         if(in_range_enemies.size() == 0) {
             this.getMessageCallback().send(this.getName() + " tried to shoot an arrow but there were no enemies in range.");
         }else if (this.arrows_count <= 0){

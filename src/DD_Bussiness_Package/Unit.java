@@ -30,19 +30,34 @@ public abstract class Unit extends Tile {
     }
 
 
-    public ArrayList<Enemy> get_enemies_in_n_range (int range, Game_Board game_board){  //////  maybe give the player the board so we can access the Enemies
-        ArrayList<Enemy> res = new ArrayList<Enemy>();   //////  maybe make a <= version for Boss  !!!!!!!!!!!!!!!
-        for (Monster m: game_board.getMonsters()){
-            if (m.getRange(game_board.getThe_player()) < range){
-                res.add(m);
+    public ArrayList<Enemy> get_enemies_in_n_range (int range, Game_Board game_board, String type){  //////  maybe give the player the board so we can access the Enemies
+        if (type.equals("re")) {
+            ArrayList<Enemy> res = new ArrayList<Enemy>();
+            for (Monster m : game_board.getMonsters()) {
+                if (m.getRange(game_board.getThe_player()) < range) {
+                    res.add(m);
+                }
             }
-        }
-        for (Trap t: game_board.getTraps()){
-            if (t.getRange(game_board.getThe_player()) < range){
-                res.add(t);
+            for (Trap t : game_board.getTraps()) {
+                if (t.getRange(game_board.getThe_player()) < range) {
+                    res.add(t);
+                }
             }
+            return res;
+        }else {
+            ArrayList<Enemy> res = new ArrayList<Enemy>();   //////  maybe make a <= version for Boss  !!!!!!!!!!!!!!!
+            for (Monster m : game_board.getMonsters()) {
+                if (m.getRange(game_board.getThe_player()) <= range) {
+                    res.add(m);
+                }
+            }
+            for (Trap t : game_board.getTraps()) {
+                if (t.getRange(game_board.getThe_player()) <= range) {
+                    res.add(t);
+                }
+            }
+            return res;
         }
-        return res;
     }
 
 

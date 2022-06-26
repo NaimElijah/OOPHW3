@@ -101,7 +101,6 @@ public class Game_Board {
 
 
 
-
     public ArrayList<ArrayList<Tile>> getArrays_Board() {
         return this.arrays_Board;
     }

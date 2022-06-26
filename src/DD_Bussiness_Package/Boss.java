@@ -36,7 +36,7 @@ public class Boss extends Monster implements HeroicUnit{
                 }
             }
         }else {    //////////   random movement
-            double i = (int)(Math.floor(Math.random()*5));
+            int i = (int)(Math.floor(Math.random()*5));
             if(i == 0){   /////////  right
                 this.move(game_board.arrays_Board.get(this.getCoordinate().getY_coor()).get(this.getCoordinate().getX_coor()+1), game_board);
             }else if (i== 1){   /////////  left

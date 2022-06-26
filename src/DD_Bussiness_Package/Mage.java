@@ -38,11 +38,11 @@ public class Mage extends Player{
             this.getMessageCallback().send(this.getName() + " cast Blizzard.");
             this.mana.setCurrent_mana(this.mana.getCurrent_mana() - this.mana_cost);
             int hits = 0;
-            ArrayList<Enemy> surrounding_enemies_in_range = this.get_enemies_in_n_range(this.ability_range, game_board);
+            ArrayList<Enemy> surrounding_enemies_in_range = this.get_enemies_in_n_range(this.ability_range, game_board, "re");
             while(hits < this.hits_count && surrounding_enemies_in_range.size() > 0){   /////////////////////////////////////////  continue
                 int index_attacked = (int)(Math.floor(Math.random() * (surrounding_enemies_in_range.size())));  /// the random enemy
                 this.attack(surrounding_enemies_in_range.get(index_attacked), this.spell_power, game_board, "sp");  /// attacking the random enemy
-                surrounding_enemies_in_range = this.get_enemies_in_n_range(this.ability_range, game_board);   ///  updating
+                surrounding_enemies_in_range = this.get_enemies_in_n_range(this.ability_range, game_board, "re");   ///  updating
                 hits += 1;  /// counting hits
             }
         }
